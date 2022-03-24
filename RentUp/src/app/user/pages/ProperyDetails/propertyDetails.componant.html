@@ -1,0 +1,115 @@
+
+			<!-- ============================ New Search Form Start ================================== -->
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 img1" *ngFor="let item of property" >
+        <div class="property-listing list_view">
+
+          <div class="listing-img-wrapper">
+            <div id="carouselExampleIndicators{{item._id}}" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+
+              </ol>
+              <div class="carousel-inner" >
+                <div class="carousel-item" [ngClass]="{active : i === 0}" *ngFor="let items of item.images; let i = index">
+                  <img class="d-block w-100 position-relative"
+                  [ngStyle]="{'opacity' :item.status === 'Occupied'?'50%':''}"
+                  src="http://localhost:3000/{{items.path}}" alt="Property Image">
+                  <img
+                  *ngIf="item.status === 'Occupied'"
+                  src="assets/img/oc.png" style=" position: absolute;
+                  top: 20px;
+                  height: 350px;
+                  left: 0%;
+                  width: 350px;">
+
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators{{item._id}}" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators{{item._id}}" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+
+
+			<!-- ============================ New Search Form End ================================== -->
+
+<section class="gray">
+  <div class="container" >
+    <div class="row" >
+
+      <!-- property main detail -->
+      <div class="col-lg-12 col-md-12 col-sm-12"  *ngFor="let item of property">
+
+        <div class="property_info_detail_wrap exlio_wrap mb-4" >
+
+          <div class="property_info_detail_wrap_first" >
+            <div class="pr-price-into">
+              <div class="_card_list_flex mb-2">
+
+
+              </div>
+              <h2>{{item.address}}</h2>
+              <span><i class="lni-map-marker"></i> {{item.address}} ,{{item.city.cityName}} , {{item.state.stateName}}</span>
+            </div>
+          </div>
+
+          <!-- <div class="property_detail_section">
+            <div class="prt-sect-pric">
+              <ul class="_share_lists light">
+                <li><a href="#"><i class="fa fa-bookmark"></i></a></li>
+                <li><a href="#"><i class="fa fa-share"></i></a></li>
+              </ul>
+            </div>
+          </div> -->
+
+        </div>
+
+        <!-- Single Block Wrap -->
+        <div class="_prtis_list mb-4">
+          <div class="_prtis_list_header">
+            <ul>
+              <li>
+                <div class="content_thumb"><img src="assets/img/bed.svg" alt="" /></div>
+                <div class="content">
+                  <span class="dark">{{item.badRoomCount}} Bedrooms</span>
+                  <span class="title">Bedrooms</span>
+                </div>
+              </li>
+              <li>
+                <div class="content_thumb"><img src="assets/img/bath.svg" alt="" /></div>
+                <div class="content">
+                  <span class="dark">{{item.bathRoomCount}}  Bathrooms</span>
+                  <span class="title">Bathrooms</span>
+                </div>
+              </li>
+              <li>
+                <div class="content_thumb"><img src="assets/img/area.svg" alt="" /></div>
+                <div class="content">
+                  <span class="dark">{{item.area}}</span>
+                  <span class="title">Area</span>
+                </div>
+              </li>
+
+
+
+            </ul>
+          </div>
+          <div class="_prtis_list_body">
+            <ul class="deatil_features">
+
+            </ul>
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+
+    </div>
+
+

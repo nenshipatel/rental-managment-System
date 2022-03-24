@@ -1,0 +1,309 @@
+
+<!-- ============================ All Property ================================== -->
+<section class="gray pt-4" *ngIf="getAll === true">
+
+  <div class="container">
+
+    <div class="row m-0">
+      <div class="short_wraping">
+        <div class="row align-items-center">
+
+          <div class="col-lg-3 col-md-6 col-sm-12  col-sm-6">
+
+        <input type="text" class="form-control"  placeholder="Enter Keyword for search" [(ngModel)]="term">
+
+          </div>
+
+          <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 order-md-3 elco_bor col-sm-12">
+            <div class="shorting_pagination">
+              <div class="shorting_pagination_laft">
+
+              </div>
+                  <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+                </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-12 order-lg-3 order-md-2 col-sm-6">
+            <div class="shorting-right">
+              <label>Short By:</label>
+           
+              <select   class="btn btn-filter dropdown-toggle"  [(ngModel)]="sortedvalue" (change)="onChangeName($event)">
+                <option class="dropdown-item"  value="price"  selected>price</option>
+                <option class="dropdown-item" [value]="'area'" >Area</option>
+                <option class="dropdown-item"  [value]="'badRoomCount'">Bad Room</option>
+                <option class="dropdown-item"  [value]="'bathRoomCount'" >Bath Room</option>
+            </select>
+            <th><b></b> <i class="fa fa-fw fa-sort"></i></th>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <!-- property Sidebar -->
+
+      <div class="col-lg-12 col-md-12 col-sm-12" >
+        <div class="row justify-content-center" *ngFor="let item of property |paginate: { itemsPerPage: 5, currentPage: p, totalItems: total }| filter: term ">
+          <!-- Single Property -->
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="property-listing list_view">
+
+              <div class="listing-img-wrapper">
+
+                <div class="list-img-slide" >
+                  <div id="carouselExampleIndicators{{item._id}}" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+
+                    </ol>
+                    <div class="carousel-inner" >
+                      <div class="carousel-item" [ngClass]="{active : i === 0}" *ngFor="let items of item.images; let i = index">
+                        <img class="d-block position-relative"
+                        [ngStyle]="{'opacity' :item.status === 'Occupied'?'50%':''}"
+                        src="http://localhost:3000/{{items.path}}" alt="Property Image">
+                        <img
+                        *ngIf="item.status === 'Occupied'"
+                        src="assets/img/oc.png" style=" position: absolute;
+                        top: 20px;
+                        height: 150px;
+                        left: 40%;
+                        width: 150px;">
+
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators{{item._id}}" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators{{item._id}}" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="list_view_flex">
+
+                <div class="listing-detail-wrapper mt-1">
+                  <div class="listing-short-detail-wrap">
+                    <div class="_card_list_flex mb-2">
+                      <div class="_card_flex_01">
+
+                        <span class="_list_blickes types">{{item.type}}</span>
+                      </div>
+                      <div class="_card_flex_last">
+                        <h6 class="listing-card-info-price mb-0">₹ {{item.price}}</h6>
+                      </div>
+                    </div>
+                    <div class="_card_list_flex">
+                      <div class="_card_flex_01">
+                        <h4 class="listing-name verified"><a class="prt-link-detail">{{item.address}} , {{item.city.cityName}}, {{item.state.stateName}}
+
+                        </a></h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="price-features-wrapper">
+                  <div class="list-fx-features">
+                    <div class="listing-card-info-icon">
+                      <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>{{item.badRoomCount}} Beds
+                    </div>
+                    <div class="listing-card-info-icon">
+                      <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>{{item.bathRoomCount}} Bath
+                    </div>
+                    <div class="listing-card-info-icon">
+                      <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>{{item.area}} sqft
+                    </div>
+                  </div>
+                </div>
+
+                <div class="listing-detail-footer">
+                  <div class="footer-first">
+                    <div class="foot-rates">
+
+
+                    </div>
+                  </div>
+                  <div class="footer-flex">
+                    <a (click)="details(item._id)" class="prt-view">View Detail</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- End Single Property -->
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</section>
+<!-- ============================ All Property ================================== -->
+
+
+
+
+
+<!-- ============================ City Wise Property ================================== -->
+  <div class="spinner-grow text-primary" role="status" *ngIf="isLoading === true">
+        <span class="sr-only">Loading...</span>
+   </div>
+<section class="gray pt-4" *ngIf="getcitywiseData === true">
+
+  <div class="container">
+
+    <div class="row m-0">
+
+      <div class="short_wraping">
+        <div class="row align-items-center">
+
+          <div class="col-lg-3 col-md-6 col-sm-12  col-sm-6">
+
+        <input type="text" class="form-control"  placeholder="Enter Keyword for search" [(ngModel)]="term">
+
+          </div>
+
+          <div class="col-lg-6 col-md-12 col-sm-12 order-lg-2 order-md-3 elco_bor col-sm-12">
+            <div class="shorting_pagination">
+              <div class="shorting_pagination_laft">
+
+              </div>
+                  <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+                </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-12 order-lg-3 order-md-2 col-sm-6">
+            <div class="shorting-right">
+              <label>Short By:</label>
+
+              <select   class="btn btn-filter dropdown-toggle"  [(ngModel)]="sortedvalue" (change)="onChangeName($event)">
+                <option class="dropdown-item"  value="price"  selected>price</option>
+                <option class="dropdown-item" [value]="'area'" >Area</option>
+                <option class="dropdown-item"  [value]="'badRoomCount'">Bad Room</option>
+                <option class="dropdown-item"  [value]="'bathRoomCount'" >Bath Room</option>
+            </select>
+            <th><b></b> <i class="fa fa-fw fa-sort"></i></th>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div  class="row justify-content-center" *ngIf="cityPropety.length === 0">{{NoDataFoundMessage}}</div>
+
+      <div class="col-lg-8 col-md-12 col-sm-12"  >
+         <div class="row justify-content-center" *ngFor="let item of cityPropety |paginate: { itemsPerPage: 5, currentPage: p, totalItems: total }| filter: term  ">
+
+
+
+           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+             <div class="property-listing list_view">
+
+               <div class="listing-img-wrapper">
+
+                 <div class="list-img-slide" >
+                   <div id="carouselExampleIndicators{{item._id}}" class="carousel slide" data-ride="carousel">
+                     <ol class="carousel-indicators">
+
+                     </ol>
+                     <div class="carousel-inner" >
+                       <div class="carousel-item" [ngClass]="{active : i === 0}" *ngFor="let items of item.images; let i = index">
+                         <img class="d-block w-100 position-relative"
+                         [ngStyle]="{'opacity' :item.status === 'Occupied'?'50%':''}"
+                         src="http://localhost:3000/{{items.path}}" alt="Property Image">
+                         <img
+                         *ngIf="item.status === 'Occupied'"
+                         src="assets/img/oc.png" style=" position: absolute;
+                         top: 20px;
+                         height: 150px;
+                         left: 40%;
+                         width: 150px;">
+
+                       </div>
+                     </div>
+                     <a class="carousel-control-prev" href="#carouselExampleIndicators{{item._id}}" role="button" data-slide="prev">
+                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                       <span class="sr-only">Previous</span>
+                     </a>
+                     <a class="carousel-control-next" href="#carouselExampleIndicators{{item._id}}" role="button" data-slide="next">
+                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                       <span class="sr-only">Next</span>
+                     </a>
+                   </div>
+                 </div>
+               </div>
+
+               <div class="list_view_flex">
+
+                 <div class="listing-detail-wrapper mt-1">
+                   <div class="listing-short-detail-wrap">
+                     <div class="_card_list_flex mb-2">
+                       <div class="_card_flex_01">
+
+                         <span class="_list_blickes types">{{item.type}}</span>
+                       </div>
+                       <div class="_card_flex_last">
+                         <h6 class="listing-card-info-price mb-0">₹ {{item.price}}</h6>
+                       </div>
+                     </div>
+                     <div class="_card_list_flex">
+                       <div class="_card_flex_01">
+                         <h4 class="listing-name verified"><a class="prt-link-detail">{{item.address}} , {{item.city.cityName}}, {{item.state.stateName}}
+
+                         </a></h4>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+
+                 <div class="price-features-wrapper">
+                   <div class="list-fx-features">
+                     <div class="listing-card-info-icon">
+                       <div class="inc-fleat-icon"><img src="assets/img/bed.svg" width="13" alt="" /></div>{{item.badRoomCount}} Beds
+                     </div>
+                     <div class="listing-card-info-icon">
+                       <div class="inc-fleat-icon"><img src="assets/img/bathtub.svg" width="13" alt="" /></div>{{item.bathRoomCount}} Bath
+                     </div>
+                     <div class="listing-card-info-icon">
+                       <div class="inc-fleat-icon"><img src="assets/img/move.svg" width="13" alt="" /></div>{{item.area}} sqft
+                     </div>
+                   </div>
+                 </div>
+
+                 <div class="listing-detail-footer">
+                   <div class="footer-first">
+                     <div class="foot-rates">
+
+
+                     </div>
+                   </div>
+                   <div class="footer-flex">
+                     <a (click)="details(item._id)" class="prt-view">View Detail</a>
+                   </div>
+                 </div>
+               </div>
+
+             </div>
+           </div>
+
+
+         </div>
+       </div>
+
+    </div>
+  </div>
+</section>
+<!-- ============================ All Property ================================== -->

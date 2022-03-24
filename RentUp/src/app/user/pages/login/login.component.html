@@ -1,0 +1,49 @@
+
+<script src="https://use.fontawesome.com/f59bcd8580.js"></script>
+<div class="container">
+<div class="row m-5 no-gutters shadow-lg">
+<div class="col-md-6 d-none d-md-block">
+  <img src="assets/img/h1.png" class="img-fluid" style="min-height:100%; height: 500px;" />
+</div>
+
+<div class="col-md-6 bg-white p-5">
+<h3 class="pb-3">Login Form</h3>
+<div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
+<div class="form-style">
+
+<form [formGroup]="LoginForm" (ngSubmit)="login()">
+  <div class="form-group pb-3">
+    <input type="email" placeholder="Email" class="form-control"
+    formControlName="email" aria-describedby="emailHelp" >
+    <span class="error" *ngIf="LoginForm.controls['email'].dirty && LoginForm.hasError('required','email')"> Email is Required !!</span>
+    <span  class="error" *ngIf="LoginForm.controls['email'].errors && LoginForm.controls['email'].errors['email']">Please, enter valid email address.</span>
+
+  </div>
+  <div class="form-group pb-3">
+    <input type="password" placeholder="Password"
+    formControlName="password"
+    class="form-control" >
+  <div class="form-group pb-3"> <span class="error" *ngIf="LoginForm.controls['password'].dirty && LoginForm.hasError('required','password')"> Password is Required!!</span>
+
+
+  </div>
+  <span class="error"*ngIf="LoginForm.hasError('pattern','password')">Your Password has Atleast One specail Character and Number and One UpperCase Also!! </span>
+  </div>
+  <div class="d-flex align-items-center justify-content-between">
+
+
+</div>
+   <div class="pb-2">
+  <button type="submit" [disabled]="!LoginForm.valid" class="btn btn-dark w-100 font-weight-bold mt-2">Submit</button>
+   </div>
+</form>
+
+  <div class="pt-4 text-center">
+   If you have no account. please,<button class="btn btn-primary" (click)="navigate()"> Sign In </button>
+
+  </div>
+</div>
+
+</div>
+</div>
+</div>
