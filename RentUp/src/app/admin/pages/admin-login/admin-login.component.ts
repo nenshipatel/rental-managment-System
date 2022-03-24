@@ -26,6 +26,7 @@ export class AdminLoginComponent implements OnInit {
     this.authService.AdminLogin(this.adminLoginForm.value).subscribe(
       res=>{
         localStorage.setItem('adminData',res.token);
+   
          this.router.navigate(['admin/dashboard'])
       },err=>{
 

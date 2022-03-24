@@ -158,7 +158,7 @@ router.get('/property/:id',auth,async (req,res)=>{
     const _id = req.params.id 
      try{
         
-         const pro = await Property.find({_id,isDeleted:false}).populate("city").populate("state")
+         const pro = await Property.find({_id,isDeleted:false}).populate("city").populate("state").populate("owner")
          
          if(!pro){
              res.status(500).send() 

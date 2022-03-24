@@ -27,7 +27,6 @@ export class propertyDetailComponent implements OnInit {
       res=>{
         this.property[0]=res.pro;
 
-        // console.log(res[0].images[0].path)
       }
 
     )

@@ -78,7 +78,7 @@ router.get('/city',async (req,res)=>{
         if(!city){
             res.status(500).send() 
          }
-      console.log(typeof city)
+
          res.send(city)
     }
     catch(e){

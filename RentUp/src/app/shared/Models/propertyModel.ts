@@ -4,7 +4,7 @@ export interface Property{
   _id?: string,
   pTitle?:string,
 
-  status ?: string,
+   status ?: string,
     type ?: string,
     price ?: number,
     area ?: string,
@@ -26,5 +26,17 @@ export interface Property{
         size:string,
 
   }] ,
+  owner:{
+
+    _id : string
+    name :string
+    email : string
+    password: string,
+    mno :number,
+    isDeleted : boolean,
+    "tokens" : [
+        {}
+    ],
+  },
   isDeleted: boolean
 }

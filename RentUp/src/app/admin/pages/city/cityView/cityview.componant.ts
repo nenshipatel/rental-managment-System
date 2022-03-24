@@ -12,7 +12,7 @@ import { State } from 'src/app/shared/Models/stateModel';
 export class AdminCityViewComponent implements OnInit {
 
 
-  public city:City[]=[];
+  public city:any=[];
   public cityUpadate:City[]=[];
   public id:any;
   public State!:State[];
@@ -42,7 +42,7 @@ export class AdminCityViewComponent implements OnInit {
     this.stateService.gretCity().subscribe(
       res=>{
         this.city=res;
-
+        console.log(res[0].images[0].path)
       }
     )
 

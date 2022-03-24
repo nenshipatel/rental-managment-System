@@ -26,7 +26,7 @@
           <div class="col-lg-3 col-md-6 col-sm-12 order-lg-3 order-md-2 col-sm-6">
             <div class="shorting-right">
               <label>Short By:</label>
-           
+
               <select   class="btn btn-filter dropdown-toggle"  [(ngModel)]="sortedvalue" (change)="onChangeName($event)">
                 <option class="dropdown-item"  value="price"  selected>price</option>
                 <option class="dropdown-item" [value]="'area'" >Area</option>
@@ -100,7 +100,7 @@
                     </div>
                     <div class="_card_list_flex">
                       <div class="_card_flex_01">
-                        <h4 class="listing-name verified"><a class="prt-link-detail">{{item.address}} , {{item.city.cityName}}, {{item.state.stateName}}
+                        <h4 class="listing-name verified"><a class="prt-link-detail">{{item.address}} , {{item.city.cityName}}, {{item.state.stateName}} {{item.pinCode}}
 
                         </a></h4>
                       </div>
@@ -205,7 +205,7 @@
       <div  class="row justify-content-center" *ngIf="cityPropety.length === 0">{{NoDataFoundMessage}}</div>
 
       <div class="col-lg-8 col-md-12 col-sm-12"  >
-         <div class="row justify-content-center" *ngFor="let item of cityPropety |paginate: { itemsPerPage: 5, currentPage: p, totalItems: total }| filter: term  ">
+         <div class="row justify-content-center" *ngFor="let item of cityPropety |paginate: { itemsPerPage: 5, currentPage: p, totalItems: cityTotal }| filter: term  ">
 
 
 
@@ -261,7 +261,7 @@
                      </div>
                      <div class="_card_list_flex">
                        <div class="_card_flex_01">
-                         <h4 class="listing-name verified"><a class="prt-link-detail">{{item.address}} , {{item.city.cityName}}, {{item.state.stateName}}
+                         <h4 class="listing-name verified"><a class="prt-link-detail">{{item.address}} {{item.city.cityName}} {{item.state.stateName}}  {{item.pinCode}}
 
                          </a></h4>
                        </div>

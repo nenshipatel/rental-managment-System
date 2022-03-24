@@ -41,6 +41,9 @@ export class AuthService{
     loggedIn(){
       return !!localStorage.getItem('userData')
     }
+
+
+
     adminloggedIn(){
       return !!localStorage.getItem('adminData')
     }

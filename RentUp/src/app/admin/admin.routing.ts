@@ -12,24 +12,28 @@ import { UsersViewComponent } from './pages/users/users.componant';
 import { CityComponent } from './pages/city/city.component';
 import { AdminCityViewComponent } from './pages/city/cityView/cityview.componant';
 import { AdminProprtyComponent } from './pages/adminProperty/adminProperty.componant';
+import { AdminAuthGuard } from '../shared/adminAuthgrurd';
+
+
+
 const routes: Routes = [
   {path:'admin',component:AdminComponent,
   children: [
 
-     {path:'dashboard',component:AdminDashbourdComponent},
+     {path:'dashboard',component:AdminDashbourdComponent,canActivate : [AdminAuthGuard]},
 
-     {path: 'logout', component: AdminHeaderComponent,},
+     {path: 'logout', component: AdminHeaderComponent,canActivate : [AdminAuthGuard]},
      {path:'state', component:StateComponent,
         children:[
-          {path: 'edit/:id', component: StateComponent},
+          {path: 'edit/:id', component: StateComponent,canActivate : [AdminAuthGuard]},
           ]
     },
-    {path:'state/view',component:StateViewComponent},
-    {path:'contact',component:AdminConatactUsComponent},
-    {path:'users', component:UsersViewComponent},
-    {path:'city', component:CityComponent},
-    {path:'city/view' , component: AdminCityViewComponent},
-    {path:'property/view', component:AdminProprtyComponent},
+    {path:'state/view',component:StateViewComponent ,canActivate : [AdminAuthGuard]},
+    {path:'contact',component:AdminConatactUsComponent ,canActivate : [AdminAuthGuard]},
+    {path:'users', component:UsersViewComponent ,canActivate : [AdminAuthGuard]},
+    {path:'city', component:CityComponent ,canActivate : [AdminAuthGuard]},
+    {path:'city/view' , component: AdminCityViewComponent ,canActivate : [AdminAuthGuard]},
+    {path:'property/view', component:AdminProprtyComponent ,canActivate : [AdminAuthGuard]},
   ],
   }
 

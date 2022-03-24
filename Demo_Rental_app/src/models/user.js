@@ -34,7 +34,11 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-  
+    mno: {
+        type: Number,
+        required: true,
+        
+    },
     tokens: [{
         token: {
             type: String,

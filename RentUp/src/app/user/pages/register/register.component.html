@@ -26,6 +26,18 @@
     <span class="error"*ngIf="SingUpForm.controls['email'].dirty && SingUpForm.hasError('required','email')"> Email is Required</span>
     <span  class="error" *ngIf="SingUpForm.controls['email'].errors && SingUpForm.controls['email'].errors['email']">Please, enter valid email address.</span>
   </div>
+
+
+  <div class="form-group pb-3">
+    <input type="number" placeholder="Mobile No" class="form-control"
+    name="mno"
+    formControlName="mno"
+    aria-describedby="emailHelp">
+    <span class="error"*ngIf="SingUpForm.controls['mno'].dirty && SingUpForm.hasError('required','mno')"> Mobile No is Required</span>
+
+  </div>
+
+
   <div class="form-group pb-3">
     <input type="password" placeholder="Password"
     formControlName="password"

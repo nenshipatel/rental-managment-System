@@ -51,7 +51,7 @@ export class StateService{
       return this.http.post<any>(`${this._url}city`,city)
     }
 
-    gretCity():Observable<City[]>{
+    gretCity():Observable<any>{
       return this.http.get<any>(`${this._url}city`)
     }
 

@@ -25,7 +25,8 @@ export class RegisterComponent implements OnInit {
       name:['',Validators.required],
       email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required,
-        Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]]
+        Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]],
+      mno:['',[Validators.required,Validators.maxLength(10)]]
         })
   }
 
@@ -39,13 +40,13 @@ export class RegisterComponent implements OnInit {
         this.SingUpForm.reset();
 
 
-        console.log(this.errorMsg)
+      
         if(this.errorMsg === 'Your Account is sucessfully Created!!'){
           this.router.navigate(['/login']);
         }
 
       },err=>{
-        console.log(err.errors.email.name)
+
         this.errorMsg =   err.error.message
         this.SingUpForm.reset();
       }

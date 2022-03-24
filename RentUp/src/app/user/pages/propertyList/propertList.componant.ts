@@ -34,18 +34,13 @@ export class propertyListComponent implements OnInit {
     p: number = 1;
     NoDataFoundMessage !: string
    total!: number;
+   cityTotal!:number;
    param1 = this.activatedRoute.snapshot.paramMap.get('id')
 
   ngOnInit(): void {
 
       this.getPropertyList(this.p);
 
-      this.authService.getLoggedInUser().subscribe(
-        res=>{
-          this.User=res
-
-        }
-      )
 
 
       if(this.param1){
@@ -60,7 +55,7 @@ export class propertyListComponent implements OnInit {
     this.propertyService.getProprtyByCity(id,p).subscribe(res=>{
       this.isLoading=false;
       this.cityPropety=res.pro
-      this.total=res.pro_total
+      this.cityTotal=res.pro_total
 
       if( this.cityPropety.length === 0){
         this.NoDataFoundMessage = "No Data Found!!"
@@ -107,6 +102,15 @@ export class propertyListComponent implements OnInit {
       this.getPropertyList(this.p);
     }
 
+    if(this.sortedvalue){
+      if(this.param1){
+        this.cityWiseSortedData(this.p)
+      }
+      else{
+        this.getSortedPropertyList(this.p)
+      }
+
+    }
 
   }
 
@@ -133,7 +137,7 @@ export class propertyListComponent implements OnInit {
     this.propertyService.getProprtyByCitysorted(this.param1,this.p,this.sortedvalue).subscribe(res=>{
       this.isLoading=false;
      this.cityPropety=res.pro
-     this.total=res.pro_total
+     this.cityTotal=res.pro_total
    })
   }
 }
