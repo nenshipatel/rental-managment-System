@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { PropertyService } from 'src/app/shared/property.service';
-
+import { Property } from 'src/app/shared/Models/propertyModel';
 
 @Component({
   selector: 'app-property-Details',
@@ -13,7 +13,7 @@ import { PropertyService } from 'src/app/shared/property.service';
 })
 export class propertyDetailComponent implements OnInit {
 
-  public property:any=[]
+  public property:Property[]=[]
   displayStyledelete="none"
   id !: any;
   constructor(private router : Router,

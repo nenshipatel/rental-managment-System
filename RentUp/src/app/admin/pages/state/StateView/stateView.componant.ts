@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup , FormBuilder , Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { State } from 'src/app/shared/Models/stateModel';
 
 import { StateService } from 'src/app/shared/state.service';
 @Component({
@@ -19,7 +19,7 @@ export class StateViewComponent implements OnInit {
 
 
   public stateEditForm!: FormGroup;
-  public State: any =[];
+  public State: State[] =[];
   isError = false
   isAddMode= false;
   ErrorMessage !:string

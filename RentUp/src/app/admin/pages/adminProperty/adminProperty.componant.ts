@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/auth.service';
-import { PropertyService } from 'src/app/shared/property.service';
 
+import { PropertyService } from 'src/app/shared/property.service';
+import { Property } from 'src/app/shared/Models/propertyModel';
 @Component({
   selector: 'app-admin-property',
   templateUrl: './adminProperty.componant.html',
@@ -30,7 +30,7 @@ export class AdminProprtyComponent implements OnInit {
   }
 
 
-  delete(id:any,i:any){
+  delete(id:string,i:number){
       this.propertyService.deleteProperty(id).subscribe(res => {
         this.Property.splice(i, 1);
       });

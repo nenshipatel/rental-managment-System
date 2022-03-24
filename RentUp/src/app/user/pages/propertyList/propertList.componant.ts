@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 
 import { PropertyService } from 'src/app/shared/property.service';
-
+import { Property } from 'src/app/shared/Models/propertyModel';
 
 @Component({
   selector: 'app-propertyList',
@@ -13,29 +13,28 @@ import { PropertyService } from 'src/app/shared/property.service';
 })
 export class propertyListComponent implements OnInit {
 
-  public property:any=[]
+  public property:Property[]=[]
   public User:any={}
   public getAll = false;
   public getcitywiseData= false;
   displayStyledelete="none"
   isLoading = true;
-  sortedvalue :any = ""
+  sortedvalue :string = ""
 
 
-  param1 = this.activatedRoute.snapshot.paramMap.get('id')
-  public cityPropety : any=[];
+
+  public cityPropety : Property[]=[];
 
   constructor(private router : Router,
     private propertyService : PropertyService,
     private authService : AuthService,
     private activatedRoute : ActivatedRoute) { }
-    // page = 1;
-    // pageSize=3
+
     term!: string;
     p: number = 1;
     NoDataFoundMessage !: string
    total!: number;
-
+   param1 = this.activatedRoute.snapshot.paramMap.get('id')
 
   ngOnInit(): void {
 
@@ -94,12 +93,12 @@ export class propertyListComponent implements OnInit {
       } );
   }
 
-  details(id:any){
+  details(id:string){
     this.router.navigate([`/propertyDetails/${id}`])
   }
 
 
-  getPage(pageNo: any) {
+  getPage(pageNo: number) {
     this.p = pageNo;
     if(this.param1){
       this.getCityWiseproperty(this.param1,this.p)
@@ -108,9 +107,7 @@ export class propertyListComponent implements OnInit {
       this.getPropertyList(this.p);
     }
 
-   // this.getSortedPropertyList(this.p)
 
-    //this.cityWiseSortedData(this.p)
   }
 
 
@@ -130,7 +127,7 @@ export class propertyListComponent implements OnInit {
 
 
 
-  cityWiseSortedData(p:any){
+  cityWiseSortedData(p:number){
     this.getcitywiseData=true;
     this.getAll=false;
     this.propertyService.getProprtyByCitysorted(this.param1,this.p,this.sortedvalue).subscribe(res=>{

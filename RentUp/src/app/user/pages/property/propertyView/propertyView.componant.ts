@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup , Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { PropertyService } from 'src/app/shared/property.service';
 import { StateService } from 'src/app/shared/state.service';
+import { City } from 'src/app/shared/Models/cityModel';
+import { State } from 'src/app/shared/Models/stateModel';
+import { Property } from 'src/app/shared/Models/propertyModel';
 @Component({
   selector: 'app-property-view',
   templateUrl: './propertyView.html',
@@ -10,8 +13,8 @@ import { StateService } from 'src/app/shared/state.service';
 })
 export class PropertyViewComponent implements OnInit {
 
-  public City :any=[];
-  public State :any=[];
+  public City :City[]=[];
+  public State :State[]=[];
   public pro: any =[];
   public proEdit : any| undefined=[]
   displayStyledelete="none"

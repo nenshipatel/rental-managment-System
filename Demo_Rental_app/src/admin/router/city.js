@@ -78,7 +78,7 @@ router.get('/city',async (req,res)=>{
         if(!city){
             res.status(500).send() 
          }
-      
+      console.log(typeof city)
          res.send(city)
     }
     catch(e){
@@ -146,6 +146,7 @@ router.delete('/city/delete/:id',async (req,res)=>{
         if(!city){
             return res.status(500).send()
         }
+        
         res.send(city)
     }catch(e){
         res.status(500).send({message :"No data Found !!!"})

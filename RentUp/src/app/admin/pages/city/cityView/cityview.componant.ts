@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { StateService } from 'src/app/shared/state.service';
 import { FormGroup , FormBuilder , Validators} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { City } from 'src/app/shared/Models/cityModel';
+import { State } from 'src/app/shared/Models/stateModel';
 @Component({
   selector: 'app-city-view',
   templateUrl: './cityView.componant.html',
@@ -10,10 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AdminCityViewComponent implements OnInit {
 
 
-  public city:any=[];
-  public cityUpadate:any=[];
+  public city:City[]=[];
+  public cityUpadate:City[]=[];
   public id:any;
-  public State:any=[];
+  public State!:State[];
   public files:string[]  =  [];
   public cityForm!: FormGroup;
   public displayStyledelete= "none";
@@ -62,7 +64,7 @@ export class AdminCityViewComponent implements OnInit {
     this.displayStyledelete= "none";
   }
 
-  openPopup(id:any) {
+  openPopup(id:string) {
    this.id=id;
     this.displayStyle= "block";
     this.stateService.getCityById(id).subscribe(res=>{
@@ -79,7 +81,7 @@ export class AdminCityViewComponent implements OnInit {
     this.displayStyle= "none";
   }
 
-  delete(id:any,i:any){
+  delete(id:string,i:number){
 
     this.stateService.deleteCity(id).subscribe((res) => {
        this.city.splice(i, 1);
@@ -102,9 +104,6 @@ export class AdminCityViewComponent implements OnInit {
 
   }
 
-
-
-
     this.stateService.updateCity(this.id,formData).subscribe(res=>{
 
 
@@ -112,7 +111,7 @@ export class AdminCityViewComponent implements OnInit {
       this.router.navigate(['admin/city/view']);
 
     },err=>{
-     // console.log(err)
+
       this.errMessage=err.error.message;
     })
     this.displayStyle="none"

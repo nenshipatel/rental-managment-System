@@ -4,6 +4,7 @@ import { HttpClient ,HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Observable , throwError} from "rxjs";
 import { pipe , catchError ,retry } from "rxjs";
+import { Property } from "./Models/propertyModel";
 @Injectable({providedIn:"root"})
 export class PropertyService{
 
@@ -13,22 +14,22 @@ export class PropertyService{
       errorMsg!: string;
 
 
-      addProperty(pro: any):Observable<any>{
+      addProperty(pro:any ):Observable<any>{
         return this.http.post<any>(`${this._url}property`,pro).pipe(catchError(this.getServerErrorMessage));
       }
 
       getProperty(){
-        return this.http.get<any>(`${this._url}property/me`).pipe(catchError(this.getServerErrorMessage))
+        return this.http.get<Property[]>(`${this._url}property/me`).pipe(catchError(this.getServerErrorMessage))
       }
 
 
 
       getAllProperty(){
-        return this.http.get<any>(`${this._url}property/all`).pipe(catchError(this.getServerErrorMessage))
+        return this.http.get<Property[]>(`${this._url}property/all`).pipe(catchError(this.getServerErrorMessage))
       }
 
       getAllUserProperty(){
-        return this.http.get<any>(`${this._url}property/users/all`).pipe(catchError(this.getServerErrorMessage))
+        return this.http.get<Property[]|string>(`${this._url}property/users/all`).pipe(catchError(this.getServerErrorMessage))
       }
 
       getListOfProperty(limit:number){
@@ -36,16 +37,16 @@ export class PropertyService{
       }
 
 
-      deleteProperty(id:any){
+      deleteProperty(id:string){
         return this.http.delete<any>(`${this._url}proprty/delete/${id}`);
       }
 
 
-      editProprty(pro:any,id:any){
+      editProprty(pro:any,id:string){
         return this.http.put<any>(`${this._url}property/edit/${id}`,pro);
       }
 
-      getPropertById(id:any):Observable<any>{
+      getPropertById(id:string):Observable<any>{
         return this.http.get(`${this._url}property/${id}`).pipe(
           catchError(error => {
 
@@ -64,22 +65,22 @@ export class PropertyService{
 
       getallPropertyOtherThanme(){
 
-        return this.http.get<any>(`${this._url}property/all/list`);
+        return this.http.get<Property[]>(`${this._url}property/all/list`);
 
       }
 
-      getProprtyByCitysorted(id: any,limit:any,value:any):Observable<any>{
+      getProprtyByCitysorted(id: string|null,limit:number,value:string):Observable<any>{
         return this.http.get<any>(`${this._url}propertybycity/${id}?page=${limit}&sort=sortBy:${value}&asc=1`);
       }
 
-      
-      getProprtyByCity(id: any,limit:any,){
+
+      getProprtyByCity(id:string,limit:number){
         return this.http.get<any>(`${this._url}propertybycity/${id}?page=${limit}`);
       }
 
 
-     getSortedData(page:any,value:any):Observable<any>{
-       return this.http.get<any>(`${this._url}property/List?page=${page}&sort=sortBy:${value}&asc=1`)
+     getSortedData(page:number,value:string):Observable<any>{
+       return this.http.get<Property[]|number>(`${this._url}property/List?page=${page}&sort=sortBy:${value}&asc=1`)
      }
 
 

@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpClient ,HttpErrorResponse } from "@angular/common/http";
-
 import { Router } from "@angular/router";
 import { Observable , throwError} from "rxjs";
 import { pipe , catchError ,retry } from "rxjs";
+import { State } from "./Models/stateModel";
+import { City } from "./Models/cityModel";
 @Injectable({providedIn:"root"})
 export class StateService{
 
@@ -11,25 +12,25 @@ export class StateService{
     constructor(private http:HttpClient,
       private router : Router){}
       errorMsg!: string;
-    addState(state: any):Observable<any>{
+    addState(state: State):Observable<any>{
       return this.http.post<any>(`${this._url}state`,state)
     }
 
-    getState():Observable<any>{
+    getState():Observable<State[]>{
       return this.http.get<any>(`${this._url}state`)
     }
 
 
-    deleteState(id: any): Observable<any> {
+    deleteState(id: string): Observable<any> {
      return this.http.delete(`${this._url}state/delete/${id}`)
 
     }
 
-    updateState(id:any,state:any):Observable<any>{
+    updateState(id:string,state:State):Observable<any>{
       return this.http.put(`${this._url}state/edit/${id}`,state);
     }
 
-    getStateById(id:any):Observable<any>{
+    getStateById(id:string):Observable<any>{
       return this.http.get(`${this._url}state/${id}`).pipe(
         catchError(error => {
 
@@ -50,17 +51,17 @@ export class StateService{
       return this.http.post<any>(`${this._url}city`,city)
     }
 
-    gretCity():Observable<any>{
+    gretCity():Observable<City[]>{
       return this.http.get<any>(`${this._url}city`)
     }
 
-    deleteCity(id: any): Observable<any> {
+    deleteCity(id: string): Observable<any> {
       return this.http.delete(`${this._url}city/delete/${id}`)
 
      }
 
 
-     getCityById(id:any):Observable<any>{
+     getCityById(id:string):Observable<any>{
       return this.http.get(`${this._url}city/${id}`).pipe(
         catchError(error => {
 
@@ -74,11 +75,11 @@ export class StateService{
         })
     );
     }
-    
-   stateWiseCity(id:any){
+
+   stateWiseCity(id:string){
     return this.http.get(`${this._url}statebyCity/${id}`);
    }
-    updateCity(id:any,city:any):Observable<any>{
+    updateCity(id:string,city:any):Observable<any>{
       return this.http.put(`${this._url}city/edit/${id}`,city);
     }
 
