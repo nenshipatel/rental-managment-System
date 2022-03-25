@@ -59,12 +59,10 @@ export class AuthService{
       return this.http.post<any>(`${this._url}users/logout`,user);
 
     }
-
-    // Logout(){
-    //   localStorage.removeItem('userData');
-
-    //   this.router.navigate(['/login'])
-    // }
+    
+   editProfile(user:any){
+    return this.http.put<any>(`${this._url}user/edit`,user)
+   }
 
 
 

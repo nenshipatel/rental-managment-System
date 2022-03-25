@@ -17,17 +17,14 @@
 <!-- ============================ Page Title End ================================== -->
 
 <!-- ============================ Submit Property Start ================================== -->
+
 <section>
   <form [formGroup]="proprtyForm" (ngSubmit)="addProperty()">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-12">
 
-        <div class="alert alert-info" role="alert">
-        <p>If you don't have an account you can create one by <a routerLink="/register">Click Here</a></p>
 
-
-        </div>
 
 
         <div class="_prt_filt_add_new">
@@ -170,7 +167,7 @@
                 <div class="form-group col-md-6">
                   <label>City*</label>
                   <select formControlName="city"
-                
+
                   class="form-control" value="Select City">
                     <option value="" selected> ----Select City ----</option>
                     <option *ngFor="let city of City" [ngValue]="city._id"> {{city.cityName}}</option>

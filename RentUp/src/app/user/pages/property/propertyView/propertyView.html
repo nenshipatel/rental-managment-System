@@ -61,7 +61,7 @@
                           <div class="dash_prt_wrap">
 
                             <div class="dash_prt_thumb">
-                              <img src="http://localhost:3000/{{item.images[0].path}} "class="img-fluid" alt="" />
+                              <img src="http://localhost:3000/{{item.images[0].destination}}/{{item.images[0].filename}}  "class="img-fluid" alt="" />
                             </div>
                             <div class="dash_prt_caption">
                               <h5>{{item.pTitle}}</h5>
@@ -105,7 +105,7 @@
                         <td>
                            <div>
                             <i class="fas fa-edit" (click)="openPopup(item._id)" ></i>
-                           
+
                             <a (click)="openDeletePopup(item._id)"><i class="fas fa-trash" ></i></a>
              <!-- <a (click)="openDeletePopup(item._id)"><i class="fasfa-trash"></i>                    </a> -->
                       </div>
@@ -118,7 +118,7 @@
             <div class="modal-content">
 
               <div class="modal-body">
-                <p>Are You sure You want to delete <b>{{item.pTitle}}</b>??</p>
+                <p>Are you sure you want to delete <b>{{item.pTitle}}</b>??</p>
 
               </div>
 
@@ -268,7 +268,7 @@
         <div class="form-group ">
           <label>City</label>
           <select formControlName="city"  class="form-control" >
-            <option *ngFor="let city of City" [ngValue]="city._id"> {{city.cityName}}</option>
+            <option *ngFor="let city of City" [ngValue]="city._id" > {{city.cityName}}</option>
           </select>
           <span class="error" *ngIf="proprtyEditForm.controls['city'].dirty && proprtyEditForm.hasError('required','city')"> City is Required</span>
         </div>
@@ -278,6 +278,7 @@
           <select formControlName="state"  class="form-control" >
             <option *ngFor="let state of State" [ngValue]="state._id"> {{state.stateName}}</option>
           </select>
+
           <span class="error" *ngIf="proprtyEditForm.controls['state'].dirty && proprtyEditForm.hasError('required','state')"> State is Required</span>
         </div>
 
@@ -296,7 +297,7 @@
 
   <div class="form-group col-md-12">
     <label>Images</label>
-
+    <div *ngFor="let item of imgUrl"><img src="http://localhost:3000/{{item.destination}}/{{item.filename}} " style="height: 100px; float: left;"></div>
     <input class="form-control" type="file"
     name="images" (change)="onFileSelect($event)"
     multiple  required/> </div>

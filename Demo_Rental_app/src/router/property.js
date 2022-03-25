@@ -40,7 +40,7 @@ const storage = multer.diskStorage({
 
 
 router.post('/property',auth,upload.array("images", 8),async (req,res)=>{
-    
+    console.log(req.files)
     const pro = new Property({
         ...req.body,
         images: req.files,
@@ -209,7 +209,7 @@ router.put('/property/edit/:id',auth ,upload.array("images", 8),async (req ,res)
         await pro.save();
         res.send(pro);
         } catch (e) {
-        res.status(500).send({ error: e })
+        res.status(500).send({ errMessage: "Plaese provide valid data!" })
         }
 
 

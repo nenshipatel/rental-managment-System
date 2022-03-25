@@ -2,6 +2,40 @@ const express = require('express')
 const router = new express.Router()
 const User = require('../models/user.js')
 const auth = require('../db/middleware/auth')
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "public/user-images");
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+      cb(null, uniqueSuffix + path.extname(file.originalname));
+    },
+  });
+  
+  const filefilter = (req, file, cb) => {
+    if (
+      file.mimetype === "image/jpg" ||
+      file.mimetype === "image/jpeg" ||
+      file.mimetype === "image/png" ||
+      file.mimetype === "image/gif"
+    ) {
+      cb(null, true);
+    } else {
+      cb(new Error("Ivalid file formate"), false);
+    }
+  };
+  
+  const upload = multer({
+    storage: storage,
+    fileFilter: filefilter,
+    limits: 1000000,
+  });
+
+
+
 router.post('/users', async (req, res) => {
 
     try{
@@ -99,6 +133,38 @@ router.delete('/users/delete/:id', async (req, res) => {
     }catch(e){
         res.status(500).send()
     }
+})
+
+
+router.put('/user/edit',auth ,upload.array("images", 1),async (req ,res)=>{
+
+
+    const data = {
+        ...req.body,
+        owner : req.user._id,
+
+        }
+      
+        if (req.files.length) {
+        const image = req.files
+        data.images = image
+        }
+        
+        try {
+        const user = await User.findByIdAndUpdate({_id : req.user.id}, {
+        $set : data
+        },{
+        new: true
+        }
+        );
+        
+        await user.save();
+        res.send({message:"Data Updated sucessfully!"});
+        } catch (e) {
+        res.status(500).send({ error: e })
+        }
+
+
 })
 
 module.exports = router

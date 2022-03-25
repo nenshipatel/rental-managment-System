@@ -13,6 +13,7 @@ import { PropertyViewComponent } from './pages/property/propertyView/propertyVie
 import { ConatactUsComponent } from './pages/contactUs/contactUs.componant';
 import { propertyListComponent } from './pages/propertyList/propertList.componant';
 import { AuthGuard } from '../shared/auth.guard';
+import { UpdateProfile } from './pages/updateProfile/updateProfile.componant';
 const routes: Routes = [
       {path:'',component:UserComponent,
     children:[
@@ -25,6 +26,7 @@ const routes: Routes = [
       {path:'conatctus', component:ConatactUsComponent },
       {path:'propertyList', component:propertyListComponent , canActivate : [AuthGuard] },
       {path:'propertyList/:id', component:propertyListComponent},
+      {path:'upadteProfile', component:UpdateProfile},
       {path:'propertyDetails/:id', component:propertyDetailComponent, canActivate : [AuthGuard]},
 
     ]}

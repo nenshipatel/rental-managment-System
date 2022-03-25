@@ -22,7 +22,7 @@ export class AdminCityViewComponent implements OnInit {
   public displayStyle= "none";
   public cityEditForm!: FormGroup;
   public errMessage : any;
-
+  public imgUrl:any=[];
   constructor(private stateService : StateService,
     private formBuilder: FormBuilder ,
     private router : Router) { }
@@ -42,7 +42,7 @@ export class AdminCityViewComponent implements OnInit {
     this.stateService.gretCity().subscribe(
       res=>{
         this.city=res;
-        console.log(res[0].images[0].path)
+
       }
     )
 
@@ -74,6 +74,7 @@ export class AdminCityViewComponent implements OnInit {
         cityName: res.city.cityName,
         images:res.city.images
      });
+     this.imgUrl=res.city.images
     })
 
   }

@@ -18,6 +18,7 @@ import { propertyDetailComponent } from './pages/ProperyDetails/propertyyDetails
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { UpdateProfile } from './pages/updateProfile/updateProfile.componant';
 
 
 @NgModule({
@@ -33,8 +34,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     PropertyComponent,
     PropertyViewComponent,
     propertyListComponent,
-    propertyDetailComponent
-
+    propertyDetailComponent,
+    UpdateProfile
   ],
   imports: [
     SharedModule,
@@ -61,7 +62,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
       SharedModule,
       CommonModule,
       UserRoutingModule,
-
+      UpdateProfile,
       NgxPaginationModule,
       Ng2SearchPipeModule
     ]

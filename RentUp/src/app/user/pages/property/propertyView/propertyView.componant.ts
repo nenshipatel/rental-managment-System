@@ -22,6 +22,7 @@ export class PropertyViewComponent implements OnInit {
   public proprtyEditForm !: FormGroup;
   files:string  []  =  [];
   id!:string;
+  imgUrl:any=[];
   constructor(private formBuilder: FormBuilder,
     private proService : PropertyService,
     private router: Router,
@@ -87,12 +88,13 @@ openPopup(id:any) {
       badRoomCount:res.pro.badRoomCount,
       bathRoomCount:res.pro.bathRoomCount,
       address:res.pro.address,
-      city:res.pro.city,
-      state:res.pro.state,
+      city:res.pro.city._id,
+      state:res.pro.state._id,
       images:res.pro.images,
       pinCode:res.pro.pinCode,
 
    });
+   this.imgUrl=res.pro.images
    this.displayStyle= "block";
    })
 
