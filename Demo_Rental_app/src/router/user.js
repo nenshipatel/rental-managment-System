@@ -4,7 +4,7 @@ const User = require('../models/user.js')
 const auth = require('../db/middleware/auth')
 const multer = require('multer');
 const path = require('path');
-
+const SendGrid = require("./sendGrid")
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, "public/user-images");
@@ -48,7 +48,7 @@ router.post('/users', async (req, res) => {
             console.log("new User")
             const user = new User(req.body)
             await user.save() 
-            //const token = await user.generateAuthToken()
+            SendGrid.main()
             res.status(201).send({ message :"Your Account is sucessfully Created!!"})
         }
     }
