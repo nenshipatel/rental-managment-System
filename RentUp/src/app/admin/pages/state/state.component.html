@@ -1,0 +1,29 @@
+
+
+<button class="btn btn-primary"
+style="float: right;"
+routerLink="/admin/state/view">View</button>
+
+
+<br>
+<br>
+
+<div class="container" >
+<h1>Add State</h1>
+<div *ngIf="ErrorMessage">{{ErrorMessage}}</div>
+  <form [formGroup]="stateForm" (ngSubmit)="state()">
+    <div class="form-group">
+      <label for="inputName">State</label>
+      <input class="form-control"
+      name="stateName"
+      formControlName="stateName"
+      type="text" placeholder="State" required>
+      <span class="error"*ngIf="stateForm.controls['stateName'].dirty &&stateForm.hasError('required','stateName')"> State is Required</span>
+    </div>
+    <button  [disabled]="!stateForm.valid" type="submit" value="Submit" class="btn btn-primary">submit</button>
+  </form>
+
+</div>
+
+
+

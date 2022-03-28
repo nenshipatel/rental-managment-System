@@ -1,0 +1,228 @@
+
+
+<div class="page-title" style="background:#f4f4f4 url(assets/img/bg.jpg);" data-overlay="5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+
+        <div class="breadcrumbs-wrap">
+
+          <h2 class="breadcrumb-title">Add Your Property</h2>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============================ Page Title End ================================== -->
+
+<!-- ============================ Submit Property Start ================================== -->
+
+<section>
+  <form [formGroup]="proprtyForm" (ngSubmit)="addProperty()">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+
+
+
+
+        <div class="_prt_filt_add_new">
+          <a routerLink="/property/view" style="float: right;" class="prt_submit_link">view Your Property</a>
+        </div>
+
+
+      </div>
+<br>
+      <!-- Submit Form -->
+      <div class="col-lg-12 col-md-12">
+
+        <div class="submit-page p-0">
+
+          <!-- Basic Information -->
+          <div class="frm_submit_block">
+            <h3>Basic Information</h3>
+
+            <div class="frm_submit_wrap">
+              <div class="form-row">
+
+                <div class="form-group col-md-12">
+                  <label>Property Title<a  class="tip-topdata" data-tip="Property Title"><i class="ti-help"></i></a></label>
+                  <input type="text"
+                  placeholder="Title Of Property"
+                  formControlName="pTitle"
+                  name="pTitle"
+                  class="form-control">
+                  <span class="error" *ngIf="proprtyForm.controls['pTitle'].dirty && proprtyForm.hasError('required','pTitle')"> Title is Required</span>
+                </div>
+
+
+                <div class="form-group col-md-6 ">
+                  <label>Status</label>
+                  <select class="form-control" placeholder="Status" formControlName="status">
+                  <option value="" selected>----Select Property Status ----</option>
+                  <option [value]="'Vacent'">Vacent</option>
+                  <option  [value]="'Occupied'">Occupied</option>
+
+                </select>
+                <span class="error" *ngIf="proprtyForm.controls['status'].dirty && proprtyForm.hasError('required','status')"> Status is Required</span>
+              </div>
+
+                <div class="form-group col-md-6">
+                  <label>Property Type</label>
+
+                  <select class="form-control" formControlName="type">
+                    <option value="" selected>----Select Property Type ----</option>
+                    <option [value]="'Houses'">Houses</option>
+                    <option [value]="'Apartment'">Apartment</option>
+                    <option [value]="'Villas'">Villas</option>
+
+                  </select>
+                  <span class="error" *ngIf="proprtyForm.controls['type'].dirty && proprtyForm.hasError('required','type')"> Type is Required</span>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Price</label>
+                  <input type="text"
+                  formControlName="price"
+                   class="form-control" placeholder="Rupee">
+                   <span class="error" *ngIf="proprtyForm.controls['price'].dirty && proprtyForm.hasError('required','price')"> Price is Required</span>
+                   <span class="error" *ngIf="proprtyForm.hasError('pattern','price')"> Price Should always in Number!!</span>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Area</label>
+                  <input type="number"
+                  placeholder="Area"
+                  formControlName="area"
+                  class="form-control">
+                  <span class="error" *ngIf="proprtyForm.controls['area'].dirty && proprtyForm.hasError('required','area')">Area is Required</span>
+
+                  <span class="error" *ngIf="proprtyForm.hasError('pattern','area')">Area should be in sqft In Number only!!</span>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Bedrooms</label>
+                  <select
+                  formControlName="badRoomCount"
+                  required
+                  class="form-control">
+                  <option value="" selected>----Select No Of Bad Room----</option>
+                    <option [value]="1">1</option>
+                    <option [value]="2">2</option>
+                    <option [value]="3">3</option>
+                    <option [value]="4">4</option>
+                    <option [value]="5">5</option>
+                  </select>
+                  <span class="error" *ngIf="proprtyForm.controls['badRoomCount'].dirty && proprtyForm.hasError('required','badRoomCount')"> This Field is Required</span>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Bathrooms</label>
+                  <select
+                  required
+                  formControlName="bathRoomCount"
+                  class="form-control">
+                  <option value="" selected> ----Select No Of BathRoom ----</option>
+                    <option [value]="1">1</option>
+                    <option [value]="2">2</option>
+                    <option [value]="3">3</option>
+                    <option [value]="4">4</option>
+                    <option [value]="5">5</option>
+                  </select>
+                  <span class="error" *ngIf="proprtyForm.controls['bathRoomCount'].dirty && proprtyForm.hasError('required','bathRoomCount')"> This Field is Required</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="frm_submit_block">
+            <h3>Location</h3>
+            <div class="frm_submit_wrap">
+              <div class="form-row">
+
+                <div class="form-group col-md-6">
+                  <label>Address</label>
+                  <input type="text"
+                  placeholder="Address"
+                  formControlName="address"
+                  class="form-control">
+                  <span class="error" *ngIf="proprtyForm.controls['address'].dirty && proprtyForm.hasError('required','address')">Address is Required</span>
+                </div>
+
+
+
+                <div class="form-group col-md-6">
+                  <label>State*</label>
+
+                  <select formControlName="state" (change)="onstateSelect($event)" class="form-control" >
+                    <option value="" selected> ----Select State ----</option>
+                    <option *ngFor="let state of State" value="{{state._id}}"> {{state.stateName}}</option>
+                  </select>
+                  <span class="error" *ngIf="proprtyForm.controls['state'].dirty && proprtyForm.hasError('required','state')"> State is Required</span>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                  <label>City*</label>
+                  <select formControlName="city"
+
+                  class="form-control" value="Select City">
+                    <option value="" selected> ----Select City ----</option>
+                    <option *ngFor="let city of City" [ngValue]="city._id"> {{city.cityName}}</option>
+                  </select>
+                  <span class="error" *ngIf="proprtyForm.controls['city'].dirty && proprtyForm.hasError('required','city')"> City is Required</span>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label>Pin Code*</label>
+                  <input type="text"
+                  placeholder="Pin Code"
+                  formControlName="pinCode"
+                  class="form-control">
+                  <span class="error" *ngIf="proprtyForm.controls['pinCode'].dirty && proprtyForm.hasError('required','pinCode')"> PinCode is Required</span>
+                  <span class="error" *ngIf="proprtyForm.hasError('pattern','pinCode')"> Pincode Should always in Number!!</span>
+
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-12">
+            <label>Images</label>
+
+            <input type="file"
+            name="images" (change)="onFileSelect($event)"
+            multiple />
+
+          <span class="error" *ngIf="proprtyForm.hasError('min','images')"> Minimum  4 Images are Require!!</span>
+
+    </div>
+
+
+
+          <div class="form-group">
+            <div class="col-lg-12 col-md-12">
+            <button class="btn btn-theme"
+
+            type="submit">Submit</button>
+              <button class="btn btn-theme" (click)="cancleProprty()">Cancle</button>
+              </div>
+          </div>
+          <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
+</section>
+<!-- ============================ Submit Property End ================================== -->
+
+
+
+
+
