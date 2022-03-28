@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
    private router : Router ) { }
 
   public LoginForm!: FormGroup;
-  public errorMsg !: string
+  public errorMsg !: string;
+  public user!: string | null
   ngOnInit(): void {
 
     this.LoginForm = this.formBuilder.group({
@@ -23,6 +24,14 @@ export class LoginComponent implements OnInit {
       password:['',[Validators.required,
         Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')]]
     })
+
+
+    if(this.user?.length === 0){
+      this.authservice.logout(this.user)
+      localStorage.removeItem('userData');
+      this.router.navigate(['/login'])
+
+    }
   }
 
   login(){
@@ -32,6 +41,10 @@ export class LoginComponent implements OnInit {
          localStorage.setItem('userData',res.token);
          this.router.navigate(['/dashboard'])
          this.LoginForm.reset()
+         this.user = res.token
+
+
+
       },err=>{
 
          this.errorMsg =   err.error.errMessage

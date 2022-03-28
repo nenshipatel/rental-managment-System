@@ -5,17 +5,17 @@ const Admin = require('../models/adminLogin')
 const admin_auth = require('../../db/middleware/admin_auth')
 
 
-// router.post('/admin/register', async (req, res) => {
-//     const admin = new Admin(req.body)
+router.post('/admin/register', async (req, res) => {
+    const admin = new Admin(req.body)
 
-//       try {
-//         await admin.save() 
-//         const token = await admin.generateAuthToken()
-//          res.status(201).send({ admin , token})
-//     } catch (e) {
-//         res.status(400).send(e)
-//     }
-// })
+      try {
+        await admin.save() 
+        const token = await admin.generateAuthToken()
+         res.status(201).send({ admin , token})
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
 
 // router.get('/admin', async (req, res) => {
 //     const admin =  await Admin.find({})

@@ -2,34 +2,62 @@
 const nodemailer = require("nodemailer");
 
 
-async function main() {
- 
-  let testAccount = await nodemailer.createTestAccount();
+class SendMail{ 
 
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
+ mail = async function sendmail() {
+  let testAccount = await nodemailer.createTestAccount();
+ 
+  }
+
+ transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
-    secure: true, // true for 465, false for other ports
+    secure: true,
     auth: {
-      user: 'rentup123.123@gmail.com', // generated ethereal user
-      pass: 'Patel.nenshi', // generated ethereal password
+      user: 'rentup123.123@gmail.com', 
+      pass: 'Patel.nenshi', 
     },
   });
-
-  let info = await transporter.sendMail({
-    from: 'rentup123.123@gmail.com', // sender address
-    to: "vishakhaagarwal.dcs22n@vnsgu.ac.in", // list of receivers
-    subject: "About Registered Sucessfully!", // Subject line
-    text: "You are registered sucessfully!!", // plain text body
-   
-  });
-
-
-
 }
 
-main().catch(console.error);
 
+const obj = new SendMail()
 
-module.exports = main
+obj.registrationSendMail=async(email)=>{
+ //Function call of transpoter
+  let info = await obj.transporter.sendMail({
+    from: 'rentup123.123@gmail.com', 
+    to: email, 
+    subject: "About Registration on RentUp",
+    html: "You are registered sucessfully in <b>Rentup</b>!", 
+   
+  });
+}
+
+  
+ obj.forgetPassword = async (email,id)=>{
+   //console.log(email)
+  
+    if(email){
+      let info = await obj.transporter.sendMail({
+        from: 'rentup123.123@gmail.com', 
+        to: email, 
+        subject: "About Forget Password in RentUp", 
+        html: `Please<a href='http://localhost:4200/resetPassword/${id}'> click here <a> for resetting the password resetting the password`, 
+       
+      });
+    }
+      else{
+        throw new Error("email not found!")
+        
+      }
+     }
+ 
+    
+ 
+ 
+
+  
+
+module.exports =obj
+

@@ -19,6 +19,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { UpdateProfile } from './pages/updateProfile/updateProfile.componant';
+import { forgetPasswordComponant } from './pages/forgetPassword/forgetPassword.componant';
+import { ResetPasswordComponant } from './pages/resetPassword/resetPassword.componant';
+import { ChangePasswordComponant } from './pages/changePassword/chagePassword.componant';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import { UpdateProfile } from './pages/updateProfile/updateProfile.componant';
     PropertyViewComponent,
     propertyListComponent,
     propertyDetailComponent,
-    UpdateProfile
+    UpdateProfile,
+    forgetPasswordComponant,
+    ResetPasswordComponant,
+    ChangePasswordComponant
   ],
   imports: [
     SharedModule,
@@ -58,6 +64,9 @@ import { UpdateProfile } from './pages/updateProfile/updateProfile.componant';
       PropertyViewComponent,
       propertyListComponent,
       propertyDetailComponent,
+      forgetPasswordComponant,
+      ResetPasswordComponant,
+      ChangePasswordComponant,
 
       SharedModule,
       CommonModule,

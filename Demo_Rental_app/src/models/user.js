@@ -102,6 +102,9 @@ userSchema.statics.findCredentials=async (email,password)=>{
     return user;
 }
 
+
+
+
 userSchema.pre('save',async function(next){
     const user = this
 

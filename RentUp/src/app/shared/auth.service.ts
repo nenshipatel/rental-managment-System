@@ -10,11 +10,10 @@ import { pipe , catchError ,retry } from "rxjs";
 export class AuthService{
 
 
+  private _url="http://localhost:3000/"
   errorMsg!: string;
 
-
-    private _url="http://localhost:3000/"
-    constructor(private http:HttpClient,
+  constructor(private http:HttpClient,
       private router : Router){}
 
     UserRegister(user:any):Observable<any>{
@@ -35,13 +34,28 @@ export class AuthService{
 
      }
 
+
+    forgetPassword(email : any){
+      return this.http.get<any>(`${this._url}users/email?email=${email}`)
+    }
+
+    resetPassword(id:any,password:any){
+      return this.http.put<any>(`${this._url}user/resetPassword/${id}`,password)
+    }
+
+
+    changePassword(changePass:any){
+      return this.http.put<any>(`${this._url}user/cahngePassword`,changePass)
+    }
+
+
      getLoggedInUser(){
       return this.http.get<any>(`${this._url}users/me`)
      }
+
     loggedIn(){
       return !!localStorage.getItem('userData')
     }
-
 
 
     adminloggedIn(){
@@ -59,7 +73,7 @@ export class AuthService{
       return this.http.post<any>(`${this._url}users/logout`,user);
 
     }
-    
+
    editProfile(user:any){
     return this.http.put<any>(`${this._url}user/edit`,user)
    }

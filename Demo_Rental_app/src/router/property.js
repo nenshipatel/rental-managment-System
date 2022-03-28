@@ -40,7 +40,7 @@ const storage = multer.diskStorage({
 
 
 router.post('/property',auth,upload.array("images", 8),async (req,res)=>{
-    console.log(req.files)
+ 
     const pro = new Property({
         ...req.body,
         images: req.files,

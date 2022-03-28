@@ -4,7 +4,10 @@ const User = require('../models/user.js')
 const auth = require('../db/middleware/auth')
 const multer = require('multer');
 const path = require('path');
-const SendGrid = require("./sendGrid")
+
+const sendGrid = require('./sendGrid.js');
+const bycript = require('bcryptjs');
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, "public/user-images");
@@ -38,23 +41,26 @@ const storage = multer.diskStorage({
 
 router.post('/users', async (req, res) => {
 
-    try{
+   // try{
         const user1 = await User.find({email: req.body.email})
         if(user1.length!=0){
           res.send({message : " This Email is already Exits!! "})
         
         }
         else{
-            console.log("new User")
+           
             const user = new User(req.body)
+          
+            sendGrid.registrationSendMail(req.body.email)
             await user.save() 
-            SendGrid.main()
+       
+              
             res.status(201).send({ message :"Your Account is sucessfully Created!!"})
-        }
-    }
-     catch (e) {
-       res.status(400).send()
-    }
+         }
+    // }
+    //  catch (e) {
+    //    res.status(400).send()
+    // }
 
 
 })
@@ -75,6 +81,8 @@ router.get('/users_count', async (req, res) => {
       res.send(e)
   }
 })
+
+
 
 router.get('/users/me',auth, async (req, res) => {
     res.send(req.user)
@@ -165,6 +173,72 @@ router.put('/user/edit',auth ,upload.array("images", 1),async (req ,res)=>{
         }
 
 
+})
+
+
+
+router.put('/user/resetPassword/:id',async (req ,res)=>{
+
+    try{
+        
+    const id = req.params.id;
+
+    updatedPassword = await bycript.hash(req.body.password,8)
+    const updateUser = await User.updateOne({_id:id},{$set:{password:updatedPassword}},{new:true});
+     res.send({message:"Your password is reset! Please,login throgh it."})
+
+    }catch(e){
+        return res.status(500).send({errorMessage:"Something went wrong!"});
+    }
+
+})
+
+
+
+router.put('/user/cahngePassword',auth,async (req ,res)=>{
+
+    try{
+    
+ 
+        const user = await User.findOne({_id:req.user._id})
+   
+        const ismatch = await bycript.compare(req.body.oldPassword,user.password)
+        if(!ismatch) throw new Error("you entered wrong password!")
+
+
+        updatedPassword = await bycript.hash(req.body.newPassword,8)
+        const updateUser = await User.updateOne({_id:req.user._id},{$set:{password:updatedPassword}},{new:true});
+        res.send({message:"Your password is sucessfully changed"})
+
+    }catch(e){
+        return res.status(500).send({errorMessage:"you entered wrong password!"});
+    }
+
+})
+
+
+
+
+
+
+router.get('/users/email', async (req, res) => {
+    try{
+
+        const email = req.query.email
+        
+         const userEmail =  await User.find({email:email})
+        
+        if(userEmail.length === 0){
+           return res.status(404).send({message:"This email address is not match!"})
+        }
+        res.send(userEmail)
+
+         await sendGrid.forgetPassword(email,userEmail[0]._id)
+
+    }
+    catch(e){
+      res.send(e)
+    }
 })
 
 module.exports = router
