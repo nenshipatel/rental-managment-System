@@ -1,0 +1,146 @@
+
+    <a
+    routerLink="/admin/city"
+    style="float: right;"
+    type="button"
+    class="btn btn-primary"
+
+  >Add New
+</a>
+<br>
+<br>
+
+<table  class="table table-striped table-bordered sortable" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th >State</th>
+      <th >City</th>
+      <th >Images</th>
+      <th colspan="2" >Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of city; let i = index">
+
+      <td>{{c.state.stateName}}</td>
+      <td>{{c.cityName}}</td>
+
+        <td>   <img
+
+          src="http://localhost:3000/{{c.images[0].path}}"
+          style="height: 100px; width: 100px;"
+          alt="City Image"></td>
+
+     <td>
+          <button
+          style=" padding: 10px"
+          type="button"
+          class="btn btn-primary"
+          (click)="openPopup(c._id)"><i class="bi bi-pencil" ></i>Edit
+        </button>
+
+        <div
+          class="modal"
+          tabindex="-1"
+          role="dialog"
+          [ngStyle]="{'display':displayStyle}">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title">Edit City</h2>
+                <div *ngIf="errMessage">{{errMessage}}</div>
+              </div>
+              <div class="modal-body">
+                <div *ngIf="errMessage" class="alert alert-danger" >{{errMessage}}</div>
+                <form [formGroup]="cityEditForm" (ngSubmit)="editCity()" >
+                  <div class="form-group">
+                    <label for="inputName">State</label>
+                    <select formControlName="state"  class="form-control" >
+                      <option *ngFor="let state of State" [ngValue]="state._id"> {{state.stateName}}</option>
+                    </select>
+
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName">City</label>
+                    <input class="form-control"
+                    name="cityName"
+
+                    formControlName="cityName" required>
+
+                  </div>
+
+                  <div class="form-group">
+
+
+                    <label>Images</label>
+                    <div *ngFor="let item of imgUrl"><img src="http://localhost:3000/{{item.destination}}/{{item.filename}} " style="height: 100px; float: left;"></div>
+                    <input class="form-control" type="file"
+                    name="images" (change)="onFileSelect($event)"
+                    multiple  required/>
+                  </div>
+
+                  <button type="submit" value="Submit" [disabled]="!cityEditForm.valid" class="btn btn-primary">submit</button>
+
+                </form>
+
+              </div>
+
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger"
+                        (click)="closePopup()">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </td>
+
+
+      <td>
+        <button
+                 style=" padding: 10px"
+                 type="button"
+                 class="btn btn-danger"
+                 (click)="openDeletePopup()"><i class="bi bi-pencil" ></i>     Delete
+               </button>
+               <div
+                 class="modal"
+                 tabindex="-1"
+                 role="dialog"
+                 [ngStyle]="{'display':displayStyledelete}">
+                 <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+
+                     <div class="modal-body">
+                       <p>Are you sure you want to delete this item?</p>
+
+                     </div>
+
+                     <div class="modal-footer">
+                       <button type="button" class="btn btn-primary"
+                       (click)="delete(c._id,i)">
+                       Yes
+                     </button>
+                       <button type="button" class="btn btn-danger"
+                               (click)="closeDeletePopup()">
+                         No
+                       </button>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+
+              </td>
+
+
+
+  </tbody>
+</table>
+
+<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+
+<!-- Then put toasts within -->
+
+

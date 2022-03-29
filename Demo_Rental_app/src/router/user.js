@@ -85,7 +85,8 @@ router.get('/users_count', async (req, res) => {
 
 
 router.get('/users/me',auth, async (req, res) => {
-    res.send(req.user)
+    const user = await User.findOne({_id:req.user._id}).populate("city").populate("state")
+    res.send(user)
 })
 
 

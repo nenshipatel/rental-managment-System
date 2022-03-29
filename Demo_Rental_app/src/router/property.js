@@ -92,7 +92,7 @@ router.get('/property/all/list',auth,async (req,res)=>{
 router.get('/property/List',auth ,async (req,res)=>{
 
      try{
-        const limit = 5;
+        const limit = 6;
         const skip = (req.query.page - 1) * limit;
         const sort={};
        
