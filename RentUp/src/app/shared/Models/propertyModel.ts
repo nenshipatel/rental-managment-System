@@ -16,23 +16,23 @@ export interface Property{
     pinCode ?: number,
   images?:[
     {
-        fieldname:string,
-        originalname:string,
-        encoding:string,
-        mimetype:string,
-        destination:string,
-        filename:string,
-        path:string,
-        size:string,
+        fieldname?:string,
+        originalname?:string,
+        encoding?:string,
+        mimetype?:string,
+        destination?:string,
+        filename?:string,
+        path?:string,
+        size?:string,
 
   }] ,
   owner:{
 
-    _id : string
-    name :string
-    email : string
-    password: string,
-    mno :number,
+    _id ?: string
+    name ?:string
+    email ?: string
+    password?: string,
+    mno ?:number,
     isDeleted : boolean,
     "tokens" : [
         {}

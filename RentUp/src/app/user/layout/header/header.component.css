@@ -14,7 +14,7 @@ header {
     padding: 26px 0px;
 }
 .logo a {
-    color: #3a76cb;
+    color: #27ae60;
     text-transform: capitalize;
     color: #000000;
     font-size: 35px;
@@ -49,7 +49,7 @@ header {
     font-size: 20px;
     font-weight: 500;
     line-height: 1.3;
-    color: #3a76cb;
+    color:#27ae60;
     display: block;
    text-decoration:none;
 }
@@ -62,8 +62,8 @@ header {
     border-radius: 4px;
     background-color: #fff;
     text-align: center;
-    color: #3a76cb;
-    border: solid 1px #3a76cb;
+    color: #27ae60;
+    border: solid 1px #27ae60;
     vertical-align: middle;
     display: table-cell;
 }
@@ -71,7 +71,7 @@ header {
     margin-right: 0px;
 }
 .main-menu ul.right-nav li.active a {
-    background-color: #3a76cb;
+    background-color: #27ae60;
     color: #fff;
 }
 @media(max-width:1000px){
@@ -85,13 +85,13 @@ header {
     width: 20%;
 }
 .mob-menu span {
-    border: solid 2px #3a76cb;
+    border: solid 2px #27ae60;
     display: block;
     text-align: center;
     border-radius: 4px;
     padding: 2px 6px;
     width: 50px;
-    color: #3a76cb;
+    color:  #27ae60;
     font-size: 25px;
     cursor: pointer;
 }

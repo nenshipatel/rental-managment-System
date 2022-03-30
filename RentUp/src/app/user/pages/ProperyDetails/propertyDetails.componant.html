@@ -1,6 +1,6 @@
+<!--
 
-			<!-- ============================ New Search Form Start ================================== -->
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 img1" *ngFor="let item of property" >
+      <div class="col-xl-6 col-lg-12  col-md-12 col-sm-12 img1" *ngFor="let item of property" >
         <div class="property-listing list_view">
 
           <div class="listing-img-wrapper">
@@ -17,9 +17,9 @@
                   *ngIf="item.status === 'Occupied'"
                   src="assets/img/oc.png" style=" position: absolute;
                   top: 20px;
-                  height: 350px;
+                  height: 200px;
                   left: 0%;
-                  width: 350px;">
+                  width: 200px;">
 
                 </div>
               </div>
@@ -33,14 +33,11 @@
               </a>
             </div>
 
-
-			<!-- ============================ New Search Form End ================================== -->
-
-<section class="gray">
+  <section class="gray">
   <div class="container" >
     <div class="row" >
 
-      <!-- property main detail -->
+
       <div class="col-lg-12 col-md-12 col-sm-12"  *ngFor="let item of property">
 
         <div class="property_info_detail_wrap exlio_wrap mb-4" >
@@ -59,7 +56,6 @@
 
         </div>
 
-        <!-- Single Block Wrap -->
         <div class="_prtis_list mb-4">
           <div class="_prtis_list_header">
             <ul>
@@ -127,6 +123,106 @@
       </div>
 
 
+    </div> -->
+
+
+
+
+
+
+<div *ngFor="let item of property; let i = index">
+
+<section class="gallery_parts pt-2 pb-2 d-none d-sm-none d-md-none d-lg-none d-xl-block" >
+  <div class="container">
+    <div class="row align-items-center"  >
+      <div class="col-lg-8 col-md-7 col-sm-12 pr-1" >
+      <div class="gg_single_part left"><a href="http://localhost:3000/{{item.images[0].path}}" class="mfp-gallery"><img src="http://localhost:3000/{{item.images[0].path}}" class="img-fluid mx-auto" alt="" /></a></div>
+      </div>
+
+      <div class="col-lg-4 col-md-5 col-sm-12 pl-1"  >
+         <div class="gg_single_part-right min"><a href="http://localhost:3000/{{item.images[1].path}}" class="mfp-gallery"><img src="http://localhost:3000/{{item.images[1].path}}" class="img-fluid mx-auto" alt="" /></a></div>
+     <div class="gg_single_part-right min mt-2 mb-2"><a href="http://localhost:3000/{{item.images[2].path}}" class="mfp-gallery"><img src="http://localhost:3000/{{item.images[2].path}}" class="img-fluid mx-auto" alt="" /></a></div>
+        <div class="gg_single_part-right min"><a href="http://localhost:3000/{{item.images[0].path}}" class="mfp-gallery"><img src="http://localhost:3000/{{item?.images[0].path}}" class="img-fluid mx-auto" alt="" /></a></div>
+      </div>
+    </div>
     </div>
 
+</section>
 
+ <div class="featured_slick_gallery gray d-block d-md-block d-lg-block d-xl-none">
+  <div class="featured_slick_gallery-slide" *ngFor="let items of item.images; let i = index">
+    <div class="featured_slick_padd"><a href="http://localhost:3000/{{items.path}}" class="mfp-gallery"><img src="http://localhost:3000/{{items.path}}" class="img-fluid mx-auto" alt="" /></a></div>
+
+  </div>
+</div>
+
+<section class="pt-4">
+  <div class="container">
+    <div class="row">
+
+    <div class="col-lg-8 col-md-12 col-sm-12">
+
+        <div class="property_info_detail_wrap mb-4">
+
+          <div class="property_info_detail_wrap_first">
+            <div class="pr-price-into">
+              <ul class="prs_lists">
+                <li><span class="bed">{{item.badRoomCount} Beds</span></li>
+                <li><span class="bath">{{item.bathRoomCount}} Bath</span></li>
+
+                <li><span class="sqft"> {{item.area}}sqft</span></li>
+              </ul>
+              <h2> {{item.address}} {{item.city.cityName}} {{item.state.stateName}}</h2>
+              <span><i class="lni-map-marker"></i> {{item.city.cityName}} {{item.state.stateName}} {{item.pinCode}} </span>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <div class="property_block_wrap">
+
+          <div class="property_block_wrap_header">
+            <h4 class="property_block_title">Belong To</h4>
+          </div>
+
+          <div class="block-body">
+            <p> <b>Name : </b> {{item.owner.name}}</p>
+            <p> <b>Email : </b> {{item.owner.email}}</p>
+            <p ><b> Mobile No :</b> {{item.owner.mno}}</p>
+          </div>
+
+        </div>
+
+
+        <div class="property_block_wrap">
+
+          <div class="property_block_wrap_header">
+            <h4 class="property_block_title">Advance Features</h4>
+          </div>
+
+          <div class="block-body">
+            <ul class="row p-0 m-0">
+              <li class="col-lg-4 col-md-6 mb-2 p-0"><i class="fa fa-bed mr-1"></i>{{item.badRoomCount}} Bedrooms</li>
+              <li class="col-lg-4 col-md-6 mb-2 p-0"><i class="fa fa-bath mr-1"></i>{{item.bathRoomCount}} Bathrooms</li>
+              <li class="col-lg-4 col-md-6 mb-2 p-0"><i class="fa fa-expand-arrows-alt mr-1"></i>{{item.area}} sqft</li>
+              <li class="col-lg-4 col-md-6 mb-2 p-0"><b>₹</b> {{item.price}} /- Price</li>
+              <li class="col-lg-4 col-md-6 mb-2 p-0"> <i class='fas fa-minus-circle'></i> {{item.status}} Status</li>
+              <li class="col-lg-4 col-md-6 mb-2 p-0"><i class="fa fa-home" aria-hidden="true"></i> {{item.type}} Type </li>
+
+
+            </ul>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+  </div>
+</section>
+</div>

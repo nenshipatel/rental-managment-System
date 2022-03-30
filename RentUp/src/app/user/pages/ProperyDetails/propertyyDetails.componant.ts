@@ -13,7 +13,7 @@ import { Property } from 'src/app/shared/Models/propertyModel';
 })
 export class propertyDetailComponent implements OnInit {
 
-  public property:Property[]=[]
+  public property:any=[]
   displayStyledelete="none"
   id !: any;
   constructor(private router : Router,
