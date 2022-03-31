@@ -5,9 +5,6 @@ const auth = require('../db/middleware/auth');
 const multer = require('multer');
 const path = require('path');
 
-
-
-
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, "public/property-images");
@@ -62,11 +59,15 @@ router.get('/property/me',auth,async (req,res)=>{
  
  try{
    
-     const pro = await Property.find({ owner:req.user._id, isDeleted:false}).populate("city").populate("state")
+    const limit = 3;
+    const skip = (req.query.page - 1) * limit;
+     const pro = await Property.find({ owner:req.user._id, isDeleted:false}).populate("city").populate("state").skip(skip).limit(limit);
+
+     const pro_count = await Property.find({ owner:req.user._id, isDeleted:false}).populate("city").populate("state").count();
      if(!pro){
          res.status(500).send() 
       }
-      res.send(pro)
+      res.json({pro: pro,pro_total:pro_count})
  }
  catch(e){
      res.status(500).send()

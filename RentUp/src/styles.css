@@ -55,14 +55,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 @import url(src/assets/plugins/font-awesome.css);
 @import url(src/assets/plugins/flaticon.css); */
 
-/*------------------------------------
-	Fonts
-------------------------------------*/
 
+label{
+  font-weight: 600;
+};
 
-/*------------------------------------
-	Preloader
-------------------------------------*/
 .preloader {
   background-color: #ffffff;
   background-image: url("src/assets/img/loader.svg");
@@ -1689,8 +1686,8 @@ table.table tr th {
 }
 .table .thead-dark th {
     color: #fff;
-    background-color: #212529;
-    border-color: #32383e;
+    background-color: #27ae60;;
+    border-color: #27ae60;;
 }
 
 /*----------- Group Button ------------*/
@@ -3001,7 +2998,7 @@ outline:none;
     margin-bottom: 30px;
 }
 .form-control {
-    height:54px;
+
     border-radius: 0;
     font-size:15px;
     box-shadow: none;
@@ -3011,7 +3008,7 @@ outline:none;
 }
 .submit-form .form-control, .submit-page .form-control, .frm_submit_block .form-control{
     background: #f9fafc;
-    border: 1px solid #ebedf5;
+    border: 1px solid #75a5d9;
     border-radius: 3px;
 	color: #646e77;
 }
@@ -3160,7 +3157,7 @@ opacity: 1;
     border-radius: 0;
     border: none;
     height: 56px;
-    border: 1px solid #ebedf5;
+    border: 1px solid #75a5d9;
     border-radius: 4px;
     padding-left: 15px;
 }
@@ -10380,7 +10377,7 @@ span.mod-close {
 }
 .resp_log_caption .form-group .form-control:focus{
     background:#ffffff;
-	color:#27ae60;
+	  color:#27ae60;
     border: 1px solid rgba(39, 174, 96,0.2);
 }
 .resp_log_caption .input-with-icon i {
@@ -10749,33 +10746,33 @@ span.approved-agent i {
     color:#b5c1d0;
 }
 .side-booking-body .form-group {
-    height: 80px;
+  height: 80px;
 	color:#707e9c;
 	font-weight:500;
 	position: relative;
-    padding: 10px 5px 10px 5px;
+  padding: 10px 5px 10px 5px;
 }
 .form-group {
 	color:#707e9c;
 	font-weight:500;
 	position: relative;
-    padding:0;
+   padding:0;
 	margin-bottom:10px;
 }
 .st-search-form-tour.withlbl .form-group {
-    height: 90px;
+  height: 90px;
 	color:#707e9c;
 	font-weight:500;
-    position: relative;
-    padding: 27px 5px 8px 5px;
+  position: relative;
+  padding: 27px 5px 8px 5px;
 }
 .form-group.search{
 	padding:0 !important;
 }
 .side-booking-body .form-group .form-control{
 	padding-left:45px;
-    margin: 0 !important;
-    height: 100%;
+  margin: 0 !important;
+  height: 100%;
 	box-shadow:none !important;
 	background:transparent;
 	border:none;
@@ -10790,7 +10787,7 @@ span.approved-agent i {
     margin: 0 !important;
 	box-shadow:none !important;
 	background: #ffffff;
-	border:1px solid #e7eaf1;
+	border:1px solid #75a5d9;
 	color:#707e9c;
 	border-radius:4px;
 }
@@ -11781,7 +11778,7 @@ h3.pa-name {
 }
 .single_widgets.widget_search form input[type="search"] {
     border-radius:4px;
-    border:1px solid #ebedf5;
+    border:1px solid #75a5d9;
     background:#f9fafc;
     font-size: 12px;
     padding: 10px 70px 10px 30px;
@@ -12517,15 +12514,16 @@ ul.packages-lists-list li {
 .dash_user_menues ul li a {
     padding:1rem 1rem;
     color:#144273;
-	border-radius:0.4rem;
-	background:#ffffff;
+	 border-radius:0.4rem;
+	 background:#ffffff;
     font-size: 13px;
     display: inline-block;
     width: 100%;
     font-weight:500;
-	position: relative;
-	transition:all ease 0.4s;
-	font-family:'Jost', sans-serif;
+	 position: relative;
+	 transition:all ease 0.4s;
+	 font-family:'Jost', sans-serif;
+   margin: 5px 0;
 }
 .dash_user_menues ul li a:hover, .dash_user_menues ul li a:focus{
 	color: #27ae60;

@@ -9,6 +9,7 @@ import { Property } from 'src/app/shared/Models/propertyModel';
 @Component({
   selector: 'app-propertyList',
   templateUrl: './propertyList.componant.html',
+  styleUrls:['./propertyList.componant.css']
 
 })
 export class propertyListComponent implements OnInit {
@@ -18,7 +19,7 @@ export class propertyListComponent implements OnInit {
   public getAll = false;
   public getcitywiseData= false;
   displayStyledelete="none"
-  isLoading = true;
+  isLoading !: boolean;
   sortedvalue :string = ""
 
 
@@ -33,15 +34,14 @@ export class propertyListComponent implements OnInit {
     term!: string;
     p: number = 1;
     NoDataFoundMessage !: string
-   total!: number;
-   cityTotal!:number;
-   param1 = this.activatedRoute.snapshot.paramMap.get('id')
+    total!: number;
+    cityTotal!:number;
+    param1 = this.activatedRoute.snapshot.paramMap.get('id')
 
   ngOnInit(): void {
 
+    this.isLoading=true
       this.getPropertyList(this.p);
-
-
 
       if(this.param1){
           this. getCityWiseproperty(this.param1,this.p)
@@ -52,7 +52,9 @@ export class propertyListComponent implements OnInit {
   getCityWiseproperty(id:any,p:number){
     this.getAll=false;
     this.getcitywiseData= true;
+
     this.propertyService.getProprtyByCity(id,p).subscribe(res=>{
+      console.log(res)
       this.isLoading=false;
       this.cityPropety=res.pro
       this.cityTotal=res.pro_total
@@ -65,11 +67,12 @@ export class propertyListComponent implements OnInit {
 
 
   getPropertyList(p:number){
+
     this.getcitywiseData=false;
     this.getAll=true;
     this.propertyService.getListOfProperty(p).subscribe(
       res=>{
-        this.isLoading=false;
+       this.isLoading=false;
         this.property=res.pro;
 
         this.total = res.pro_total;

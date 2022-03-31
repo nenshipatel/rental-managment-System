@@ -28,7 +28,7 @@
         <td>   <img
 
           src="http://localhost:3000/{{c.images[0].path}}"
-          style="height: 100px; width: 100px;"
+          style="height: 100px;"
           alt="City Image"></td>
 
      <td>
@@ -70,10 +70,8 @@
                   </div>
 
                   <div class="form-group">
-
-
                     <label>Images</label>
-                    <div *ngFor="let item of imgUrl"><img src="http://localhost:3000/{{item.destination}}/{{item.filename}} " style="height: 100px; float: left;"></div>
+                    <div *ngFor="let item of imgUrl"><img src="http://localhost:3000/{{item.destination}}/{{item.filename}} " style="height:100px; float: left;"></div>
                     <input class="form-control" type="file"
                     name="images" (change)="onFileSelect($event)"
                     multiple  required/>

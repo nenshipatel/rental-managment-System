@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-		<meta charset="utf-8" />
-		<meta name="author" content="Themezhub" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>RentUP </title>
-
-
-
-    </head>
-
-
-
+<!--
 
 
 <header>
@@ -35,39 +20,14 @@
            <div class="main-menu">
               <ul class="nav">
                  <li><a routerLink="/dashboard"> Home </a> </li>
-                 <li><a routerLink="/propertyList"> Property </a>
-
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    My Properties
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" routerLink="/property">Property Add</a>
-                    <a class="dropdown-item" routerLink="/property/view">Property View</a>
-
-                  </div>
-                </li>
-
+                 <li><a routerLink="/propertyList"> Property </a></li>
                 <li><a routerLink="/conatctus"> Contact Us </a> </li>
-                <li>
-                  <a *ngIf="!authService.loggedIn()" routerLink="/login" routerLinkActive="active"> <i class="fa fa-user"></i> Log in </a> </li>
-                <!-- <li > <a *ngIf="!authService.loggedIn()" routerLink="/register" routerLinkActive="active"> <i class="fa fa-sign-in"></i> Sign up </a> </li> -->
 
-                <!-- <li > <a *ngIf="authService.loggedIn()"style="cursor: pointer;"
-                  (click)="logout()"> Logout </a> </li> -->
+                <li><a *ngIf="authService.loggedIn()" routerLink="/myAccount/upadteProfile"> My Account </a> </li>
+                <li> <a *ngIf="authService.loggedIn()"style="cursor: pointer;"
+                  (click)="logout()"> Logout </a> </li>
+                <li><a *ngIf="!authService.loggedIn()" routerLink="/login" routerLinkActive="active"><i class="fa fa-user"></i> Log in </a> </li>
 
-                  <li class="nav-item dropdown" *ngIf="authService.loggedIn()">
-                    <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      My Account
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" routerLink="/upadteProfile" style="cursor: pointer;">Update Profile</a>
-                      <a class="dropdown-item"  style="cursor: pointer;"
-                      (click)="logout()"> Logout </a>
-
-                    </div>
-                  </li>
                  </ul>
 
            </div>
@@ -76,3 +36,79 @@
   </div>
 </header>
 
+
+<script>
+  $(document).ready(function() {
+ $(".mob-menu span").click(function(){
+    $(".main-menu").slideToggle();
+   });
+});
+</script> -->
+
+
+
+
+
+<div class="header header-light">
+  <div class="container">
+    <nav id="navigation" class="navigation navigation-landscape">
+      <div class="nav-header">
+        <a class="nav-brand" routerLink="/dashboard" >
+          <img src="assets/img/logo.png" class="logo" alt="" />
+        </a>
+        <div class="nav-toggle"></div>
+        <div class="mobile_nav">
+          <ul>
+
+            <li><a href="#" data-toggle="modal" data-target="#login"><i class="fas fa-user-circle fa-lg"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="nav-menus-wrapper" style="transition-property: none;">
+        <ul class="nav-menu">
+
+          <li><a routerLink="/dashboard" routerLinkActive="active">Home<span class="submenu-indicator"></span></a>
+
+          </li>
+
+          <li><a routerLink="/propertyList" routerLinkActive="active">property<span class="submenu-indicator"></span></a>
+
+          </li>
+
+          <li><a routerLink="/conatctus" routerLinkActive="active">contact us<span class="submenu-indicator"></span></a>
+
+          </li>
+
+          <li><a>My Account<span class="submenu-indicator"></span></a>
+            <ul class="nav-dropdown nav-submenu">
+              <li class=""><a routerLink="/myAccount/upadteProfile" >Update Profile<span class="submenu-indicator"></span></a></li>
+              <li class=""><a routerLink="/myAccount/property">Add Property<span class="submenu-indicator"></span></a></li>
+              <li class=""><a routerLink="/myAccount/property/view">View Property<span class="submenu-indicator"></span></a></li>
+              <li class=""><a routerLink="/myAccount/changePassword" >change password<span class="submenu-indicator"></span></a></li>
+
+
+            </ul>
+          </li>
+
+
+        </ul>
+
+        <ul class="nav-menu nav-menu-social align-to-right">
+
+          <li>
+            <a href="#" class="alio_green" data-toggle="modal" data-target="#login">
+              <i class="fas fa-sign-in-alt mr-1"></i><span class="dn-lg">Sign In</span>
+            </a>
+          </li>
+          <li class="add-listing">
+            <a href="submit-property.html"  class="theme-cl">
+               <i class="fas fa-plus-circle mr-1"></i>Add Property
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+<!-- End Navigation -->
+<div class="clearfix"></div>

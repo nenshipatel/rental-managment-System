@@ -9,6 +9,7 @@ import { StateService } from 'src/app/shared/state.service';
 @Component({
   selector: 'app-upadteProfile',
   templateUrl: './updateProfile.componant.html',
+  styleUrls:['./updateProfile.componant.css']
 
 
 })

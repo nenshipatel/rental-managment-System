@@ -18,8 +18,8 @@ export class PropertyService{
         return this.http.post<any>(`${this._url}property`,pro).pipe(catchError(this.getServerErrorMessage));
       }
 
-      getProperty(){
-        return this.http.get<Property[]>(`${this._url}property/me`).pipe(catchError(this.getServerErrorMessage))
+      getProperty(limit:number){
+        return this.http.get<Property[]>(`${this._url}property/me?page=${limit}`).pipe(catchError(this.getServerErrorMessage))
       }
 
 

@@ -53,8 +53,6 @@ router.post('/users', async (req, res) => {
           
             sendGrid.registrationSendMail(req.body.email)
             await user.save() 
-       
-              
             res.status(201).send({ message :"Your Account is sucessfully Created!!"})
          }
     // }

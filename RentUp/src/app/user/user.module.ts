@@ -22,6 +22,7 @@ import { UpdateProfile } from './pages/updateProfile/updateProfile.componant';
 import { forgetPasswordComponant } from './pages/forgetPassword/forgetPassword.componant';
 import { ResetPasswordComponant } from './pages/resetPassword/resetPassword.componant';
 import { ChangePasswordComponant } from './pages/changePassword/chagePassword.componant';
+import { MyAccountComponent } from './pages/myAccount/myAccount.componant';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ChangePasswordComponant } from './pages/changePassword/chagePassword.co
     UpdateProfile,
     forgetPasswordComponant,
     ResetPasswordComponant,
-    ChangePasswordComponant
+    ChangePasswordComponant,
+    MyAccountComponent
   ],
   imports: [
     SharedModule,
@@ -67,6 +69,7 @@ import { ChangePasswordComponant } from './pages/changePassword/chagePassword.co
       forgetPasswordComponant,
       ResetPasswordComponant,
       ChangePasswordComponant,
+      MyAccountComponent,
 
       SharedModule,
       CommonModule,

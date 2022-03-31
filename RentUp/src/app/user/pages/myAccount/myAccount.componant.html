@@ -1,0 +1,85 @@
+
+<!--
+
+<section class="gray pt-5 pb-5">
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <div class="col-lg-3 col-md-4 col-sm-12" >
+        <div class="property_dashboard_navbar">
+
+          <div class="dash_user_avater">
+            <img
+
+            src=" " alt="">
+                   <h4></h4>
+            <span></span>
+          </div>
+
+          <div class="dash_user_menues" >
+
+          </div>
+
+
+
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</section> -->
+
+
+<section class="gray pt-5 pb-5">
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <div class="col-lg-3 col-md-4 col-sm-12">
+        <div class="property_dashboard_navbar" style="height: 100%;">
+
+          <div class="dash_user_avater">
+            <img src="http://localhost:3000/{{User?.images[0]?.path}}" class="img-fluid avater" alt="">
+            <h4>{{User?.name}}</h4>
+            <span>{{User?.email}}</span>
+          </div>
+
+          <div class="dash_user_menues">
+            <ul>
+
+              <li ><a routerLink="/myAccount/upadteProfile" routerLinkActive="active"><i class="fa fa-user-tie"></i>My Profile</a></li>
+
+              <li><a routerLink="/myAccount/property/view" routerLinkActive="active" ><i class="fa fa-tasks"></i>My Properties</a></li>
+
+
+              <li><a routerLink="/myAccount/changePassword" routerLinkActive="active" ><i class="fa fa-unlock-alt"></i>Change Password</a></li>
+            </ul>
+          </div>
+
+          <div class="dash_user_footer">
+            <ul>
+
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-9 col-md-8 col-sm-12" >
+        <div class="dashboard-body">
+
+          <div class="dashboard-wraper" >
+
+            <router-outlet></router-outlet>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

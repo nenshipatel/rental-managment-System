@@ -15,7 +15,7 @@ export class PropertyViewComponent implements OnInit {
 
   public City :City[]=[];
   public State :State[]=[];
-  public pro: any =[];
+  public property: any =[] ;
   public proEdit : any| undefined=[]
   displayStyledelete="none"
   displayStyle = "none";
@@ -23,25 +23,26 @@ export class PropertyViewComponent implements OnInit {
   files:string  []  =  [];
   id!:string;
   imgUrl:any=[];
+  p: number = 1;
+  NoDataFoundMessage !: string
+ total!: number;
   constructor(private formBuilder: FormBuilder,
     private proService : PropertyService,
     private router: Router,
     private statService : StateService) { }
 
   ngOnInit(): void {
-  this.proService.getProperty().subscribe(res=>{
-    this.pro=res
 
-    this.statService.gretCity().subscribe(res=>{
-      this.City = res;
+    this.getMyProperty(this.p)
 
-    })
-
-    this.statService.getState().subscribe(res=>{
-     this.State = res;
-     })
+  this.statService.gretCity().subscribe(res=>{
+    this.City = res;
 
   })
+
+  this.statService.getState().subscribe(res=>{
+   this.State = res;
+   })
 
 
 
@@ -60,6 +61,18 @@ export class PropertyViewComponent implements OnInit {
       pinCode:['',[Validators.required, Validators.pattern("^[0-9]*$"),Validators.max(6)]]
 
    })
+
+}
+
+
+getMyProperty(p:number){
+  this.proService.getProperty(p).subscribe((res:any)=>{
+    this.property=res.pro
+    this.total=res.pro_total
+    if(res.pro.length === 0){
+      this.NoDataFoundMessage = "No data found!"
+    }
+  })
 
 }
 
@@ -107,7 +120,7 @@ closePopup() {
 delete(i:any) {
 
    this.proService.deleteProperty(this.id).subscribe((res) => {
-      this.pro.splice(i, 1);
+      this.property.splice(i, 1);
       this.displayStyledelete= "none";
     })
 
@@ -152,4 +165,14 @@ for  (var i =  0; i <  event.target.files.length; i++)  {
 }
 
 }
+
+getPage(pageNo: number) {
+  this.p = pageNo;
+  this.getMyProperty(this.p)
 }
+
+
+}
+
+
+

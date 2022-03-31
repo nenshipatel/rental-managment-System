@@ -167,10 +167,12 @@
           <div class="property_info_detail_wrap_first">
             <div class="pr-price-into">
               <ul class="prs_lists">
-                <li><span class="bed">{{item.badRoomCount} Beds</span></li>
+                <li><span class="bed">{{item.badRoomCount}} Beds</span></li>
                 <li><span class="bath">{{item.bathRoomCount}} Bath</span></li>
 
                 <li><span class="sqft"> {{item.area}}sqft</span></li>
+                <li *ngIf="item.status == 'Occupied'"><button class="Redbutton">Occupied</button></li>
+                <!-- <li *ngIf="item.status == 'Vacent'"><button class="Greenbutton">Vacent</button></li> -->
               </ul>
               <h2> {{item.address}} {{item.city.cityName}} {{item.state.stateName}}</h2>
               <span><i class="lni-map-marker"></i> {{item.city.cityName}} {{item.state.stateName}} {{item.pinCode}} </span>

@@ -2994,15 +2994,15 @@ outline:none;
     border-radius: 0;
     font-size:15px;
     box-shadow: none;
-	padding:.5rem .75rem;
-    border:1px solid #e0ecf5;
+   	padding:.5rem .75rem;
+    border:1px solid #87ade6;
 	background-clip: initial;
 }
 .submit-form .form-control, .submit-page .form-control, .frm_submit_block .form-control{
     background: #f9fafc;
-    border: 1px solid #ebedf5;
+    border: 1px solid #87ade6 ;
     border-radius: 3px;
-	color: #646e77;
+     color: #646e77;
 }
 .form-row>.col, .form-row>[class*=col-] {
     padding-right: 15px;

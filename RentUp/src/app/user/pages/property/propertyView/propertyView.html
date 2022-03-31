@@ -1,40 +1,12 @@
-<div class="page-title" style="background:#f4f4f4 url(assets/img/slider-5.jpg);" data-overlay="5">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12">
 
-        <div class="breadcrumbs-wrap">
-
-          <h2 class="breadcrumb-title">My All Properties</h2>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-<!-- ============================ Page Title End ================================== -->
-
-<!-- ============================ User Dashboard ================================== -->
-<section class="gray pt-5 pb-5">
-  <div class="container-fluid">
-
-    <div class="row">
-
-
-
-      <div class="col-lg-12 col-md-8 col-sm-12">
-        <div class="dashboard-body">
-
-
-
-          <div class="row">
-            <div class="col-lg-12 col-md-12">
-              <div class="dashboard_property">
                 <div class="table-responsive">
+
                   <div class="_prt_filt_add_new">
-                    <a routerLink="/property"
+                    <pagination-controls style="float: left;" (pageChange)="getPage($event)"></pagination-controls>
+                    <a routerLink="/myAccount/property"
                     style="float: right;"
                     class="prt_submit_link"><i class="fas fa-plus-circle"></i><span class="d-none d-lg-block d-md-block">Add New Property</span></a>
+
                   </div>
                   <br>
                   <br>
@@ -55,13 +27,14 @@
                       </tr>
                     </thead>
                     <tbody>
-                     <!-- tr block -->
-                      <tr *ngFor="let item of pro;let i = index">
+                      <div *ngIf="NoDataFoundMessage"><h5>{{NoDataFoundMessage}}</h5></div>
+                      <tr *ngFor="let item of property |paginate: { itemsPerPage: 3, currentPage: p, totalItems: total }; let i = index;  ">
                         <td >
+
                           <div class="dash_prt_wrap">
 
                             <div class="dash_prt_thumb">
-                              <img src="http://localhost:3000/{{item.images[0].destination}}/{{item.images[0].filename}}  "class="img-fluid" alt="" />
+                              <img src="http://localhost:3000/{{item.images[0].path}}"class="img-fluid" alt="" />
                             </div>
                             <div class="dash_prt_caption">
                               <h5>{{item.pTitle}}</h5>
@@ -103,8 +76,8 @@
 
                         </td>
                         <td>
-                           <div>
-                            <i class="fas fa-edit" (click)="openPopup(item._id)" ></i>
+                           <div class="p-2">
+                            <i class="fas fa-edit pe-2" (click)="openPopup(item._id)" ></i>
 
                             <a (click)="openDeletePopup(item._id)"><i class="fas fa-trash" ></i></a>
              <!-- <a (click)="openDeletePopup(item._id)"><i class="fasfa-trash"></i>                    </a> -->
@@ -143,19 +116,13 @@
                     </tbody>
                   </table>
                 </div>
-              </div>
-            </div>
-          </div>
-          <!-- row -->
 
 
-        </div>
 
-      </div>
 
-    </div>
-  </div>
-</section>
+
+
+
 
 
 
@@ -320,3 +287,28 @@
 </div>
 
 
+
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -74,11 +74,11 @@ export class PropertyComponent implements OnInit {
   this.proService.addProperty(formData).subscribe(
       res=>{
         if(res.msg==="Data Added Successfully!!!"){
-          this.router.navigate(['/property/view']);
+          this.router.navigate(['/myAccount/property/view']);
           this.proprtyForm.reset()
         }
         else{
-          this.router.navigate(['/property']);
+          this.router.navigate(['/myAccount/property']);
           this.errorMessage = "Please Provide Valid Details!!!."
         }
 

@@ -17,6 +17,7 @@ import { UpdateProfile } from './pages/updateProfile/updateProfile.componant';
 import { forgetPasswordComponant } from './pages/forgetPassword/forgetPassword.componant';
 import { ResetPasswordComponant } from './pages/resetPassword/resetPassword.componant';
 import { ChangePasswordComponant } from './pages/changePassword/chagePassword.componant';
+import { MyAccountComponent } from './pages/myAccount/myAccount.componant';
 const routes: Routes = [
       {path:'',component:UserComponent,
     children:[
@@ -24,14 +25,21 @@ const routes: Routes = [
       {path:'dashboard',component:DashbourdComponent},
       {path:'register',component:RegisterComponent},
       {path:'login',component:LoginComponent},
-      {path:'property',component:PropertyComponent ,canActivate : [AuthGuard]},
-      {path:'property/view',component:PropertyViewComponent , canActivate : [AuthGuard] },
+
       {path:'conatctus', component:ConatactUsComponent },
       {path:'propertyList', component:propertyListComponent , canActivate : [AuthGuard] },
       {path:'propertyList/:id', component:propertyListComponent , canActivate : [AuthGuard]},
-      {path:'upadteProfile', component:UpdateProfile , canActivate : [AuthGuard]} ,
       {path:'propertyDetails/:id', component:propertyDetailComponent, canActivate : [AuthGuard]},
-      {path:'changePassword', component:ChangePasswordComponant}
+       {
+        path:'myAccount',component:MyAccountComponent , canActivate:[AuthGuard],
+        children:[
+      
+          {path:'upadteProfile', component:UpdateProfile} ,
+          {path:'property',component:PropertyComponent},
+          {path:'property/view',component:PropertyViewComponent },
+          {path:'changePassword', component:ChangePasswordComponant},
+        ]
+      },
     ]},
     {path:'forgetPassword', component:forgetPasswordComponant},
     {path:'resetPassword/:id', component:ResetPasswordComponant},

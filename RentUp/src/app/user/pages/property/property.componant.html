@@ -1,47 +1,18 @@
+<form [formGroup]="proprtyForm" (ngSubmit)="addProperty()">
 
-
-<div class="page-title" style="background:#f4f4f4 url(assets/img/bg.jpg);" data-overlay="5">
-  <div class="container">
     <div class="row">
-      <div class="col-lg-12 col-md-12">
-
-        <div class="breadcrumbs-wrap">
-
-          <h2 class="breadcrumb-title">Add Your Property</h2>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-<!-- ============================ Page Title End ================================== -->
-
-<!-- ============================ Submit Property Start ================================== -->
-
-<section>
-  <form [formGroup]="proprtyForm" (ngSubmit)="addProperty()">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12">
-
-
-
 
         <div class="_prt_filt_add_new">
-          <a routerLink="/property/view" style="float: right;" class="prt_submit_link">view Your Property</a>
+          <a routerLink="/myAccount/property/view" style="float: right;" class="prt_submit_link">view Your Property</a>
         </div>
 
-
-      </div>
-<br>
-      <!-- Submit Form -->
       <div class="col-lg-12 col-md-12">
 
         <div class="submit-page p-0">
 
-          <!-- Basic Information -->
+
           <div class="frm_submit_block">
-            <h3>Basic Information</h3>
+            <h3>Add Property</h3>
 
             <div class="frm_submit_wrap">
               <div class="form-row">
@@ -187,21 +158,19 @@
                 </div>
 
 
-              </div>
-            </div>
-          </div>
 
           <div class="form-group col-md-12">
-            <label>Images</label>
+            <label>House Images</label>
 
             <input type="file"
+            class="form-control"
             name="images" (change)="onFileSelect($event)"
             multiple />
 
           <span class="error" *ngIf="proprtyForm.hasError('min','images')"> Minimum  4 Images are Require!!</span>
-
+        </div>
     </div>
-
+  </div>
 
 
           <div class="form-group">
@@ -215,12 +184,20 @@
           <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
         </div>
       </div>
-
+      </div>
     </div>
-  </div>
 </form>
-</section>
-<!-- ============================ Submit Property End ================================== -->
+
+
+
+
+
+
+
+
+
+
+
 
 
 
