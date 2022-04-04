@@ -7,10 +7,12 @@
   overflow-y: auto;
   background: #1a1a1a;
   color: #fff;
+  top: 58px;
 }
 
 .content-container {
   padding-top: 20px;
+  top:20px;
 }
 
 .sidebar-logo {

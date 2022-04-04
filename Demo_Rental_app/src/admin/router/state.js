@@ -1,7 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const State = require('../models/state')
-const admin_auth = require('../../db/middleware/admin_auth')
+const adminAuth = require('../../db/middleware/admin_auth')
 
 
 router.post('/state',async (req,res)=>{

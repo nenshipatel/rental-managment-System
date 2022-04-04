@@ -52,39 +52,47 @@ router.post('/city',upload.array("images", 3),async (req,res)=>{
     
    });
 
-   router.get('/city/:id',async (req,res)=>{
-    const _id = req.params.id 
+
+
+
+ router.get('/city',async (req,res)=>{
+
+  try{
+   
+     const city = await City.find({isDeleted:false}).populate("state");
+    
+      if(!city){
+          res.status(500).send() 
+       }
+
+       res.send(city)
+      
+  }
+  catch(e){
+      res.status(500).send({message:"No Data Found!!"})
+  }
+});
+ 
+
+router.get('/city/page',async (req,res)=>{
+
     try{
-        
-         const city = await City.find({_id})
-         if(!city){
-             res.status(500).send() 
-          }
-          res.send({city: city[0]})
-    }
-     catch(e){
-         res.status(500).send({message:"you entered Something Wrong!!"})
-     }
- });
-
-
-
-router.get('/city',async (req,res)=>{
-
-    try{
-       
-        const city = await City.find({isDeleted:false}).populate("state")
-        
+       const limit = 5;
+       const skip = (req.query.page - 1) * limit;
+       const city = await City.find({isDeleted:false}).populate("state").skip(skip).limit(limit);
+       const city_count = await City.find({isDeleted:false}).populate("state").count();
         if(!city){
             res.status(500).send() 
          }
 
-         res.send(city)
+         res.send({city:city,city_count:city_count})
+        
     }
     catch(e){
         res.status(500).send({message:"No Data Found!!"})
     }
 });
+
 
 
 
@@ -99,10 +107,20 @@ router.get('/city_count',async (req,res)=>{
   
 });
 
-
-
-
-
+router.get('/city/:id',async (req,res)=>{
+  const _id = req.params.id 
+  try{
+      
+       const city = await City.find({_id})
+       if(!city){
+           res.status(500).send() 
+        }
+        res.send({city: city[0]})
+  }
+   catch(e){
+       res.status(500).send({message:"you entered Something Wrong!!"})
+   }
+});
 
 router.put('/city/edit/:id',upload.array("images", 3),async (req ,res)=>{
   

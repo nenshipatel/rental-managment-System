@@ -10,7 +10,7 @@ routerLink="/admin/state/view">View</button>
 
 <div class="container" >
 <h1>Add State</h1>
-<div *ngIf="ErrorMessage">{{ErrorMessage}}</div>
+<div class="alert alert-danger" *ngIf="ErrorMessage">{{ErrorMessage}}</div>
   <form [formGroup]="stateForm" (ngSubmit)="state()">
     <div class="form-group">
       <label for="inputName">State</label>

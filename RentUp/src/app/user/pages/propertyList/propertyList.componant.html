@@ -1,9 +1,12 @@
 
 
  <section class="gray pt-4">
-  <div class=container4>
-    <div class="lds-dual-ring" *ngIf="isLoading === true" ></div>
-  </div>
+
+
+  <div class="center" *ngIf="isLoading === true">
+    <div class="ring"  ></div>
+    <span>loading...</span>
+ </div>
 
   <div class="container"   *ngIf="getAll === true ">
 

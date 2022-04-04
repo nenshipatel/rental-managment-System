@@ -1,5 +1,31 @@
+
+<style>
+  .fixTableHead {
+     overflow-y: auto;
+     height: 530px;
+   }
+   .fixTableHead thead th {
+     position: sticky;
+     top: 0;
+   }
+   table {
+     border-collapse: collapse;
+     width: 100%;
+   }
+   th,
+   td {
+     padding: 8px 15px;
+     border: 2px solid #000000;
+   }
+   th {
+     color: aliceblue;
+     background: #2574A9;
+
+   }
+   </style>
 <br>
 <div *ngIf="errMessage" class="alert alert-danger" >{{errMessage}}</div>
+<div class="fixTableHead">
   <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
       <tr >
@@ -58,4 +84,4 @@
     </tbody>
   </table>
 
-
+</div>

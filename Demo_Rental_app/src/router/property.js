@@ -139,6 +139,9 @@ router.get('/property/all',async (req,res)=>{
     }
    }); 
 
+
+
+
    router.get('/property/users/all',async (req,res)=>{
 
     try{
@@ -173,6 +176,24 @@ router.get('/property/:id',auth,async (req,res)=>{
  });
 
 
+
+ router.get('/property/all/page',async (req,res)=>{
+
+    try{
+        const limit = 10;
+        const skip = (req.query.page - 1) * limit;
+       
+        const pro = await Property.find({isDeleted:false}).populate("city").populate("state").populate("owner").skip(skip).limit(limit);
+        const pro_count = await Property.find({isDeleted:false}).populate("city").populate("state").populate("owner").count();
+        if(!pro){
+            res.status(500).send() 
+         }
+         res.json({pro:pro,pro_count:pro_count})
+    }
+    catch(e){
+        res.status(500).send()
+    }
+   });
 
  router.get('/property_count',async (req,res)=>{
     try{

@@ -13,6 +13,8 @@ import { CityComponent } from './pages/city/city.component';
 import { AdminCityViewComponent } from './pages/city/cityView/cityview.componant';
 import { AdminProprtyComponent } from './pages/adminProperty/adminProperty.componant';
 import { AdminAuthGuard } from '../shared/adminAuthgrurd';
+import { AdminChangePasswordComponent } from './pages/adminChangePassword/adminChangepassword.componant';
+import { AuthGuard } from '../shared/auth.guard';
 
 
 
@@ -34,6 +36,7 @@ const routes: Routes = [
     {path:'city', component:CityComponent ,canActivate : [AdminAuthGuard]},
     {path:'city/view' , component: AdminCityViewComponent ,canActivate : [AdminAuthGuard]},
     {path:'property/view', component:AdminProprtyComponent ,canActivate : [AdminAuthGuard]},
+    {path:'changePassword', component:AdminChangePasswordComponent,canActivate:[AuthGuard]}
   ],
   }
 

@@ -50,7 +50,7 @@ export class StateComponent implements OnInit {
         this.router.navigate(['/admin/state/view'])
         this.stateForm.reset()
       },err=>{
-          this.ErrorMessage=err.message
+          this.ErrorMessage=err.error.message
       }
     )
   }

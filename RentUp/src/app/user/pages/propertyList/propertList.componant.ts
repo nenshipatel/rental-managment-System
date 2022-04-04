@@ -54,7 +54,7 @@ export class propertyListComponent implements OnInit {
     this.getcitywiseData= true;
 
     this.propertyService.getProprtyByCity(id,p).subscribe(res=>{
-      console.log(res)
+
       this.isLoading=false;
       this.cityPropety=res.pro
       this.cityTotal=res.pro_total

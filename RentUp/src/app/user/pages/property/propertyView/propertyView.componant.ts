@@ -18,14 +18,16 @@ export class PropertyViewComponent implements OnInit {
   public property: any =[] ;
   public proEdit : any| undefined=[]
   displayStyledelete="none"
-  displayStyle = "none";
+
   public proprtyEditForm !: FormGroup;
   files:string  []  =  [];
   id!:string;
   imgUrl:any=[];
   p: number = 1;
   NoDataFoundMessage !: string
- total!: number;
+   total!: number;
+  model!:any
+
   constructor(private formBuilder: FormBuilder,
     private proService : PropertyService,
     private router: Router,
@@ -107,15 +109,12 @@ openPopup(id:any) {
       pinCode:res.pro.pinCode,
 
    });
-   this.imgUrl=res.pro.images
-   this.displayStyle= "block";
+
    })
 
 
 }
-closePopup() {
-  this.displayStyle= "none";
-}
+
 
 delete(i:any) {
 
@@ -154,8 +153,11 @@ this.proService.editProprty(formData,this.id).subscribe(
     res=>{
     this.router.navigate(['/property/view']);
 
-  })
-  this.displayStyle= "none";
+  });
+
+  // this.model.dismiss({
+  //   'dismissed': true
+  // });
 }
 
 

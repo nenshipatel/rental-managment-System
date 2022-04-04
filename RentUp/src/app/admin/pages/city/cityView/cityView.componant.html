@@ -1,3 +1,27 @@
+<style>
+  .fixTableHead {
+     overflow-y: auto;
+     height: 530px;
+   }
+   .fixTableHead thead th {
+     position: sticky;
+     top: 0;
+   }
+   table {
+     border-collapse: collapse;
+     width: 100%;
+   }
+   th,
+   td {
+     padding: 8px 15px;
+     border: 2px solid #000000;
+   }
+   th {
+     color: aliceblue;
+     background: #2574A9;
+
+   }
+   </style>
 
     <a
     routerLink="/admin/city"
@@ -9,7 +33,7 @@
 </a>
 <br>
 <br>
-
+<div class="fixTableHead">
 <table  class="table table-striped table-bordered sortable" cellspacing="0" width="100%">
   <thead>
     <tr>
@@ -20,7 +44,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let c of city; let i = index">
+    <tr *ngFor="let c of city |paginate: { itemsPerPage: 5, currentPage: p, totalItems: total } let i = index">
 
       <td>{{c.state.stateName}}</td>
       <td>{{c.cityName}}</td>
@@ -136,9 +160,13 @@
 
   </tbody>
 </table>
+</div>
 
-<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
-
+<div class="text-center justify-content-center">
+  <ul>
+    <pagination-controls (pageChange)="getPage($event)" style="align-self: center;"></pagination-controls>
+  </ul>
+</div>
 <!-- Then put toasts within -->
 
 

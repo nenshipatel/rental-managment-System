@@ -11,6 +11,9 @@ import { AuthService } from 'src/app/shared/auth.service';
 export class UsersViewComponent implements OnInit {
 
   Users:any=[];
+  p: number = 1;
+
+  total!:number;
   public displayStyle = "none";
   constructor(
    private authservice:AuthService,
@@ -19,12 +22,15 @@ export class UsersViewComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.authservice.getUsers().subscribe(res=>{
+    this.getUsers(this.p)
 
+  }
 
+  getUsers(p:number){
+    this.authservice.getUsers(p).subscribe(res=>{
       this.Users=res.users;
+       this.total=res.user_count;
     })
-
   }
 
 
@@ -47,4 +53,8 @@ export class UsersViewComponent implements OnInit {
  }
 
 
+ getPage(pageNo: number) {
+  this.p = pageNo;
+  this.getUsers(this.p)
+}
 }

@@ -23,6 +23,9 @@ export class AdminCityViewComponent implements OnInit {
   public cityEditForm!: FormGroup;
   public errMessage : any;
   public imgUrl:any=[];
+  p: number = 1;
+
+  total!:number;
   constructor(private stateService : StateService,
     private formBuilder: FormBuilder ,
     private router : Router) { }
@@ -39,16 +42,18 @@ export class AdminCityViewComponent implements OnInit {
         this.State=res;
       })
 
-    this.stateService.gretCity().subscribe(
-      res=>{
-        this.city=res;
+      this.GetCity(this.p)
 
-      }
-    )
+ }
 
-
-
-
+ GetCity(p:number){
+  this.stateService.getCity(p).subscribe(
+    res=>{
+      this.city=res.city;
+      this.total=res.city_count
+      console.log(res.city_count)
+    }
+  )
  }
   onFileSelect(event:any) {
     for  (var i =  0; i <  event.target.files.length; i++)  {
@@ -117,4 +122,16 @@ export class AdminCityViewComponent implements OnInit {
     })
     this.displayStyle="none"
   }
+
+
+
+
+  getPage(pageNo: number) {
+    this.p = pageNo;
+
+    this.GetCity(this.p)
+
+
+  }
+
 }

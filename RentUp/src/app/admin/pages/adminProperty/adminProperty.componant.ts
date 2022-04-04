@@ -13,6 +13,8 @@ export class AdminProprtyComponent implements OnInit {
 
   Property:any=[];
   public displayStyle = "none"
+  p: number = 1;
+  total!:number;
   constructor(
   private propertyService : PropertyService,
    private router : Router ) { }
@@ -20,13 +22,20 @@ export class AdminProprtyComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.propertyService.getAllProperty().subscribe(
+    this.getproperty(this.p)
+
+  }
+
+  getproperty(p:number){
+    this.propertyService.getAllPropertyWithpagination(p).subscribe(
       res=>{
 
-        this.Property=res
+       this.Property=res.pro
+       this.total=res.pro_count
+
+       
       }
     )
-
   }
 
 
@@ -45,7 +54,10 @@ export class AdminProprtyComponent implements OnInit {
     this.displayStyle = "none";
   }
 
-
+  getPage(pageNo: number) {
+    this.p = pageNo;
+    this.getproperty(this.p)
+  }
 
 
 }

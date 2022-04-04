@@ -2,8 +2,8 @@ const express = require('express')
 const router = new express.Router()
 
 const Admin = require('../models/adminLogin')
-const admin_auth = require('../../db/middleware/admin_auth')
-
+const adminAuth = require('../../db/middleware/admin_auth')
+const bycript = require('bcryptjs');
 
 router.post('/admin/register', async (req, res) => {
     const admin = new Admin(req.body)
@@ -22,9 +22,9 @@ router.post('/admin/register', async (req, res) => {
 //     res.send(admin)
 // })
 
-// router.get('/users/me',auth, async (req, res) => {
-//     res.send(req.user)
-// })
+router.get('/admin/me',adminAuth, async (req, res) => {
+    res.send(req.admin)
+})
 
 
 router.post('/admin/login', async (req, res) => {
@@ -37,7 +37,7 @@ router.post('/admin/login', async (req, res) => {
     }
 })
 
- router.post('/admin/logout',admin_auth, async (req, res) => {
+ router.post('/admin/logout',adminAuth, async (req, res) => {
     try {
         req.admin.tokens = req.admin.tokens.filter((token) => {
             return token.token !== req.token
@@ -49,6 +49,27 @@ router.post('/admin/login', async (req, res) => {
         res.status(500).send({message :"Something went Wrong!!!"})
     }
 });
+
+
+router.put('/admin/cahngePassword/:id',adminAuth,async (req ,res)=>{
+
+    try{
+        const admin = await Admin.findOne({_id:req.admin._id})
+   
+   
+        const ismatch = await bycript.compare(req.body.oldpassword,req.admin.password)
+        if(!ismatch) throw new Error("you entered wrong password!")
+
+
+        updatedPassword = await bycript.hash(req.body.newpassword,8)
+        const updateAdmin = await Admin.updateOne({_id:admin._id},{$set:{password:updatedPassword}},{new:true});
+        res.send({message:"Your password is sucessfully changed"})
+
+    }catch(e){
+        return res.status(500).send({errorMessage:"you entered wrong password!"});
+    }
+
+})
 
 
 

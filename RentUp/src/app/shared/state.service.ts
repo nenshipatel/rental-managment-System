@@ -55,6 +55,10 @@ export class StateService{
       return this.http.get<any>(`${this._url}city`)
     }
 
+    getCity(limit:number):Observable<any>{
+      return this.http.get<any>(`${this._url}city/page?page=${limit}`)
+    }
+
     deleteCity(id: string): Observable<any> {
       return this.http.delete(`${this._url}city/delete/${id}`)
 

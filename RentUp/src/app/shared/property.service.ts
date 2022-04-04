@@ -28,6 +28,11 @@ export class PropertyService{
         return this.http.get<Property[]>(`${this._url}property/all`).pipe(catchError(this.getServerErrorMessage))
       }
 
+
+      getAllPropertyWithpagination(limit:number){
+        return this.http.get<any>(`${this._url}property/all/page?page=${limit}`)
+      }
+
       getAllUserProperty(){
         return this.http.get<Property[]|string>(`${this._url}property/users/all`).pipe(catchError(this.getServerErrorMessage))
       }

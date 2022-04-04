@@ -58,10 +58,7 @@
         </a>
         <div class="nav-toggle"></div>
         <div class="mobile_nav">
-          <ul>
-
-            <li><a href="#" data-toggle="modal" data-target="#login"><i class="fas fa-user-circle fa-lg"></i></a></li>
-          </ul>
+          
         </div>
       </div>
       <div class="nav-menus-wrapper" style="transition-property: none;">
@@ -79,7 +76,7 @@
 
           </li>
 
-          <li><a>My Account<span class="submenu-indicator"></span></a>
+          <li><a routerLink="/myAccount/upadteProfile" routerLinkActive="active" >My Account<span class="submenu-indicator"></span></a>
             <ul class="nav-dropdown nav-submenu">
               <li class=""><a routerLink="/myAccount/upadteProfile" >Update Profile<span class="submenu-indicator"></span></a></li>
               <li class=""><a routerLink="/myAccount/property">Add Property<span class="submenu-indicator"></span></a></li>
@@ -96,12 +93,18 @@
         <ul class="nav-menu nav-menu-social align-to-right">
 
           <li>
-            <a href="#" class="alio_green" data-toggle="modal" data-target="#login">
-              <i class="fas fa-sign-in-alt mr-1"></i><span class="dn-lg">Sign In</span>
+            <a *ngIf="!authService.loggedIn()" routerLink="/login" class="alio_green" data-toggle="modal" data-target="#login">
+              <i class="fas fa-sign-in-alt mr-1"></i><span class="dn-lg">Log In</span>
+            </a>
+
+
+            <a *ngIf="authService.loggedIn()"
+            (click)="logout()"  class="alio_green" data-toggle="modal" data-target="#login">
+              <i class="fas fa-sign-in-alt mr-1"></i><span class="dn-lg">Logout</span>
             </a>
           </li>
           <li class="add-listing">
-            <a href="submit-property.html"  class="theme-cl">
+            <a  routerLink="/myAccount/property" class="theme-cl">
                <i class="fas fa-plus-circle mr-1"></i>Add Property
             </a>
           </li>

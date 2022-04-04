@@ -77,39 +77,193 @@
                         </td>
                         <td>
                            <div class="p-2">
-                            <i class="fas fa-edit pe-2" (click)="openPopup(item._id)" ></i>
+          <i class="fas fa-edit pe-2"  data-toggle="modal" data-target=".bd-example-modal-lg"
+(click)="openPopup(item._id)"></i>
 
-                            <a (click)="openDeletePopup(item._id)"><i class="fas fa-trash" ></i></a>
-             <!-- <a (click)="openDeletePopup(item._id)"><i class="fasfa-trash"></i>                    </a> -->
-                      </div>
-             <div
-          class="modal"
-          tabindex="-1"
-          role="dialog"
-          [ngStyle]="{'display':displayStyledelete}">
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h2 class="modal-title">Edit Property</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="proprtyEditForm" (ngSubmit)="editProperty()">
+
+
+
+          <div class="form-group">
+            <label for="inputName">Title</label>
+            <input class="form-control"
+            formControlName="pTitle"
+            placeholder="Title"
+
+             required>
+             <span class="error" *ngIf="proprtyEditForm.controls['pTitle'].dirty && proprtyEditForm.hasError('required','pTitle')"> Title is Required</span>
+          </div>
+
+          <div class="form-group">
+             <label for="inputName">Status</label><select
+             class="form-control" placeholder="Status"
+             formControlName="status"
+            >
+             <option  [value]="'Vacent'">Vacent</option>
+             <option  [value]="'Occupied'">Occupied</option>
+
+           </select>
+           <span class="error" *ngIf="proprtyEditForm.controls['status'].dirty && proprtyEditForm.hasError('required','status')"> Status is Required</span>
+          </div>
+          <div class="form-group">
+            <label for="inputName">Type</label>
+            <select class="form-control" formControlName="type">
+              <option [value]="'Houses'">Houses</option>
+              <option [value]="'Apartment'">Apartment</option>
+              <option [value]="'Villas'">Villas</option>
+
+            </select>
+            <span class="error" *ngIf="proprtyEditForm.controls['type'].dirty && proprtyEditForm.hasError('required','type')"> Type is Required</span>
+          </div>
+          <div class="form-group">
+            <label>Price</label>
+            <input type="text"
+            formControlName="price"
+             class="form-control" placeholder="Rupee">
+             <span class="error" *ngIf="proprtyEditForm.controls['price'].dirty && proprtyEditForm.hasError('required','price')"> Price is Required</span>
+             <span class="error" *ngIf="proprtyEditForm.hasError('pattern','price')"> Price Should always in Number!!</span>
+          </div>
+          <div class="form-group">
+            <label>Area</label>
+              <input type="text"
+                formControlName="area"
+                class="form-control">
+                <span class="error" *ngIf="proprtyEditForm.controls['area'].dirty && proprtyEditForm.hasError('required','area')">Area is Required</span>
+
+                <span class="error" *ngIf="proprtyEditForm.hasError('pattern','area')">Area should be in sqft In Number only!!</span>
+          </div>
+          <div class="form-group">
+            <label>Bedrooms</label>
+            <select
+            formControlName="badRoomCount"
+            required
+            class="form-control">
+
+              <option [value]="1">1</option>
+              <option [value]="2">2</option>
+              <option [value]="3">3</option>
+              <option [value]="4">4</option>
+              <option [value]="5">5</option>
+            </select>
+            <span class="error" *ngIf="proprtyEditForm.controls['badRoomCount'].dirty && proprtyEditForm.hasError('required','badRoomCount')"> This Field is Required</span>
+          </div>
+
+          <div class="form-group">
+            <label>Bethrooms</label>
+            <select
+            formControlName="bathRoomCount"
+            required
+            class="form-control">
+
+              <option [value]="1">1</option>
+              <option [value]="2">2</option>
+              <option [value]="3">3</option>
+              <option [value]="4">4</option>
+              <option [value]="5">5</option>
+            </select>
+            <span class="error" *ngIf="proprtyEditForm.controls['bathRoomCount'].dirty && proprtyEditForm.hasError('required','bathRoomCount')"> This Field is Required</span>
+          </div>
+
+
+          <div class="form-group ">
+            <label>Address</label>
+            <input type="text"
+            formControlName="address"
+            class="form-control">
+            <span class="error" *ngIf="proprtyEditForm.controls['address'].dirty && proprtyEditForm.hasError('required','address')">Address is Required</span>
+          </div>
+
+          <div class="form-group ">
+            <label>City</label>
+            <select formControlName="city"  class="form-control" >
+              <option *ngFor="let city of City" [ngValue]="city._id" > {{city.cityName}}</option>
+            </select>
+            <span class="error" *ngIf="proprtyEditForm.controls['city'].dirty && proprtyEditForm.hasError('required','city')"> City is Required</span>
+          </div>
+
+          <div class="form-group ">
+            <label>State</label>
+            <select formControlName="state"  class="form-control" >
+              <option *ngFor="let state of State" [ngValue]="state._id"> {{state.stateName}}</option>
+            </select>
+
+            <span class="error" *ngIf="proprtyEditForm.controls['state'].dirty && proprtyEditForm.hasError('required','state')"> State is Required</span>
+          </div>
+
+          <div class="form-group ">
+            <label>Pin Code</label>
+            <input type="text"
+
+            formControlName="pinCode"
+            class="form-control">
+            <span class="error" *ngIf="proprtyEditForm.controls['pinCode'].dirty && proprtyEditForm.hasError('required','pinCode')"> PinCode is Required</span>
+            <span class="error" *ngIf="proprtyEditForm.hasError('pattern','pinCode')"> Pincode Should always in Number!!</span>
+          </div>
+
+
+
+
+    <div class="form-group col-md-12">
+      <label>Images</label>
+      <div *ngFor="let item of imgUrl"><img src="http://localhost:3000/{{item.destination}}/{{item.filename}} " style="height: 100px; float: left;"></div>
+      <input class="form-control" type="file"
+      name="images" (change)="onFileSelect($event)"
+      multiple  required/> </div>
+
+          <button type="submit" value="Submit"  data-dismiss="modal" aria-label="Close" class="btn btn-theme">submit</button>
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+        <i class="fas fa-trash"  (click)="openDeletePopup(item._id)" data-toggle="modal" data-target="#exampleModal" ></i>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-
-              <div class="modal-body">
-                <p>Are you sure you want to delete <b>{{item.pTitle}}</b>??</p>
-
+              <div class="modal-header">
+                <h5>Delete property</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-
+              <div class="modal-body">
+                Are you sure you want to delete this item?
+              </div>
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-theme"
-                        (click)="delete(i)">
+                        (click)="delete(i)" data-dismiss="modal" aria-label="Close">
                   yes
                 </button>
                 <button type="button" class="btn btn-danger"
-                        (click)="closeDeletePopup()">
+                data-dismiss="modal" aria-label="Close"   >
                   No
                 </button>
               </div>
             </div>
           </div>
         </div>
-
+        </div>
                         </td>
                       </tr>
 
@@ -124,191 +278,3 @@
 
 
 
-
-
-  <div
-  class="modal"
-  tabindex="-1"
-  role="dialog"
-  [ngStyle]="{'display':displayStyle}">
-  <div class="modal-dialog-scrollable modal-dialog" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-      <h2 class="modal-title">Edit Property</h2>
-
-    </div>
-    <div class="modal-body">
-
-      <form [formGroup]="proprtyEditForm" (ngSubmit)="editProperty()">
-
-
-
-        <div class="form-group">
-          <label for="inputName">Title</label>
-          <input class="form-control"
-          formControlName="pTitle"
-          placeholder="Title"
-
-           required>
-           <span class="error" *ngIf="proprtyEditForm.controls['pTitle'].dirty && proprtyEditForm.hasError('required','pTitle')"> Title is Required</span>
-        </div>
-
-        <div class="form-group">
-           <label for="inputName">Status</label><select
-           class="form-control" placeholder="Status"
-           formControlName="status"
-          >
-           <option  [value]="'Vacent'">Vacent</option>
-           <option  [value]="'Occupied'">Occupied</option>
-
-         </select>
-         <span class="error" *ngIf="proprtyEditForm.controls['status'].dirty && proprtyEditForm.hasError('required','status')"> Status is Required</span>
-        </div>
-        <div class="form-group">
-          <label for="inputName">Type</label>
-          <select class="form-control" formControlName="type">
-            <option [value]="'Houses'">Houses</option>
-            <option [value]="'Apartment'">Apartment</option>
-            <option [value]="'Villas'">Villas</option>
-
-          </select>
-          <span class="error" *ngIf="proprtyEditForm.controls['type'].dirty && proprtyEditForm.hasError('required','type')"> Type is Required</span>
-        </div>
-        <div class="form-group">
-          <label>Price</label>
-          <input type="text"
-          formControlName="price"
-           class="form-control" placeholder="Rupee">
-           <span class="error" *ngIf="proprtyEditForm.controls['price'].dirty && proprtyEditForm.hasError('required','price')"> Price is Required</span>
-           <span class="error" *ngIf="proprtyEditForm.hasError('pattern','price')"> Price Should always in Number!!</span>
-        </div>
-        <div class="form-group">
-          <label>Area</label>
-            <input type="text"
-              formControlName="area"
-              class="form-control">
-              <span class="error" *ngIf="proprtyEditForm.controls['area'].dirty && proprtyEditForm.hasError('required','area')">Area is Required</span>
-
-              <span class="error" *ngIf="proprtyEditForm.hasError('pattern','area')">Area should be in sqft In Number only!!</span>
-        </div>
-        <div class="form-group">
-          <label>Bedrooms</label>
-          <select
-          formControlName="badRoomCount"
-          required
-          class="form-control">
-
-            <option [value]="1">1</option>
-            <option [value]="2">2</option>
-            <option [value]="3">3</option>
-            <option [value]="4">4</option>
-            <option [value]="5">5</option>
-          </select>
-          <span class="error" *ngIf="proprtyEditForm.controls['badRoomCount'].dirty && proprtyEditForm.hasError('required','badRoomCount')"> This Field is Required</span>
-        </div>
-
-        <div class="form-group">
-          <label>Bethrooms</label>
-          <select
-          formControlName="bathRoomCount"
-          required
-          class="form-control">
-
-            <option [value]="1">1</option>
-            <option [value]="2">2</option>
-            <option [value]="3">3</option>
-            <option [value]="4">4</option>
-            <option [value]="5">5</option>
-          </select>
-          <span class="error" *ngIf="proprtyEditForm.controls['bathRoomCount'].dirty && proprtyEditForm.hasError('required','bathRoomCount')"> This Field is Required</span>
-        </div>
-
-
-        <div class="form-group ">
-          <label>Address</label>
-          <input type="text"
-          formControlName="address"
-          class="form-control">
-          <span class="error" *ngIf="proprtyEditForm.controls['address'].dirty && proprtyEditForm.hasError('required','address')">Address is Required</span>
-        </div>
-
-        <div class="form-group ">
-          <label>City</label>
-          <select formControlName="city"  class="form-control" >
-            <option *ngFor="let city of City" [ngValue]="city._id" > {{city.cityName}}</option>
-          </select>
-          <span class="error" *ngIf="proprtyEditForm.controls['city'].dirty && proprtyEditForm.hasError('required','city')"> City is Required</span>
-        </div>
-
-        <div class="form-group ">
-          <label>State</label>
-          <select formControlName="state"  class="form-control" >
-            <option *ngFor="let state of State" [ngValue]="state._id"> {{state.stateName}}</option>
-          </select>
-
-          <span class="error" *ngIf="proprtyEditForm.controls['state'].dirty && proprtyEditForm.hasError('required','state')"> State is Required</span>
-        </div>
-
-        <div class="form-group ">
-          <label>Pin Code</label>
-          <input type="text"
-
-          formControlName="pinCode"
-          class="form-control">
-          <span class="error" *ngIf="proprtyEditForm.controls['pinCode'].dirty && proprtyEditForm.hasError('required','pinCode')"> PinCode is Required</span>
-          <span class="error" *ngIf="proprtyEditForm.hasError('pattern','pinCode')"> Pincode Should always in Number!!</span>
-        </div>
-
-
-
-
-  <div class="form-group col-md-12">
-    <label>Images</label>
-    <div *ngFor="let item of imgUrl"><img src="http://localhost:3000/{{item.destination}}/{{item.filename}} " style="height: 100px; float: left;"></div>
-    <input class="form-control" type="file"
-    name="images" (change)="onFileSelect($event)"
-    multiple  required/> </div>
-
-        <button type="submit" value="Submit" class="btn btn-theme">submit</button>
-
-      </form>
-
-    </div>
-
-
-    <div class="modal-footer">
-      <button type="button" class="btn btn-danger"
-              (click)="closePopup()">
-        Close
-      </button>
-    </div>
-  </div>
-</div>
-</div>
-
-
-
-
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>

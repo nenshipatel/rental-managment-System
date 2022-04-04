@@ -64,8 +64,11 @@ router.post('/users', async (req, res) => {
 })
 
 router.get('/users', async (req, res) => {
-    const users =  await User.find({isDeleted:false})
-    res.json({users})
+    const limit = 5;
+    const skip = (req.query.page - 1) * limit;
+    const users =  await User.find({isDeleted:false}).skip(skip).limit(limit);
+    const user_count =  await User.find({isDeleted:false}).count();
+     res.json({users:users,user_count:user_count})
 })
 
 

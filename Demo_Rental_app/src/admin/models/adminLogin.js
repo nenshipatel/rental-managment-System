@@ -67,7 +67,7 @@ AdminLoginSchema.methods.generateAuthToken= async function(){
     admin.tokens = admin.tokens.concat({token});
      await admin.save()
      return token;
-
+    
 }
 AdminLoginSchema.statics.findCredentials=async (email,password)=>{
     const admin = await Admin.findOne({email})

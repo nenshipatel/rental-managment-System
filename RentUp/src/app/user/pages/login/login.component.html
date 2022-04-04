@@ -1,12 +1,14 @@
 
 <script src="https://use.fontawesome.com/f59bcd8580.js"></script>
+
+
 <div class="container">
-<div class="row m-5 no-gutters shadow-lg"  style="height:600px">
-<div class="col-md-6 d-none d-md-block">
-  <img src="assets/img/h1.png" class="img-fluid" style="min-height:100%; height: 500px;" />
+<div class="row m-5 no-gutters shadow-lg" >
+<div class="col-md-6 d-none d-md-block" style="padding: 20px;">
+  <img src="assets/img/h1.png" class="img-fluid" style="height: 500px;" />
 </div>
 
-<div class="col-md-6 bg-white p-5">
+<div class="col-md-6 bg-white p-5" style="height: 450px;">
 <h3 class="pb-3">Login Form</h3>
 <div *ngIf="errorMsg" class="alert alert-danger">{{errorMsg}}</div>
 <div class="form-style">
@@ -33,14 +35,14 @@
   </div>
 
    <div class="pb-2">
-    <a routerLink="/forgetPassword" style="float:right;">Forgot Password</a>
-  <button type="submit" [disabled]="!LoginForm.valid" class="btn btn-dark w-100 font-weight-bold mt-2">Submit</button>
+    <a routerLink="/forgetPassword" style="float:right; color: green;">Forgot Password</a>
+  <button type="submit" [disabled]="!LoginForm.valid" class="btn btn-theme prt_submit_link w-100" style="color : white" >Submit</button>
    </div>
 </form>
 
   <div class="pt-4 text-center">
 
-   If you have no account. please,<button class="btn btn-primary" (click)="navigate()"> Sign In </button>
+   If you have no account. please  <button class="btn btn-theme" style="color : white" (click)="navigate()"> Sign In </button>
 
   </div>
 </div>
@@ -48,6 +50,8 @@
 </div>
 </div>
 </div>
+
+
 
 
 

@@ -22,12 +22,11 @@ export class AdminLoginComponent implements OnInit {
      })
   }
   adminLogin(){
-;
+
     this.authService.AdminLogin(this.adminLoginForm.value).subscribe(
       res=>{
         localStorage.setItem('adminData',res.token);
-   
-         this.router.navigate(['admin/dashboard'])
+        this.router.navigate(['admin/dashboard'])
       },err=>{
 
          this.errMessage= err.error.message;

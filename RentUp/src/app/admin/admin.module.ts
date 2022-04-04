@@ -16,6 +16,11 @@ import { AdminCityViewComponent } from './pages/city/cityView/cityview.componant
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { AdminConatactUsComponent } from './pages/adminContact/adminContact.componant';
 import { UsersViewComponent } from './pages/users/users.componant';
+import { AdminChangePasswordComponent } from './pages/adminChangePassword/adminChangepassword.componant';
+
+import { NgxPaginationModule } from 'ngx-pagination';
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -31,13 +36,15 @@ import { UsersViewComponent } from './pages/users/users.componant';
     StateComponent,
     StateViewComponent,
     CityComponent,
+    AdminChangePasswordComponent
 
   ],
   imports: [
     SharedModule,
     CommonModule,
-    AdminRoutingModule
-
+    AdminRoutingModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule
    ],
     exports: [
       SharedModule,
@@ -55,8 +62,10 @@ import { UsersViewComponent } from './pages/users/users.componant';
       StateViewComponent,
       CityComponent,
       CommonModule,
-      AdminRoutingModule
-
+      AdminRoutingModule,
+      AdminChangePasswordComponent,
+      NgxPaginationModule,
+      Ng2SearchPipeModule
     ]
 })
 export class AdminModule { }

@@ -25,8 +25,8 @@ export class AuthService{
 
     }
 
-    getUsers(){
-      return this.http.get<any>(`${this._url}users`)
+    getUsers(limit:number){
+      return this.http.get<any>(`${this._url}users?page=${limit}`)
     }
 
     deleteUser(id: any): Observable<any> {
@@ -56,17 +56,12 @@ export class AuthService{
     loggedIn(){
       return !!localStorage.getItem('userData')
     }
-
-
     adminloggedIn(){
       return !!localStorage.getItem('adminData')
     }
     getToken(){
       return localStorage.getItem('userData');
     }
-
-
-
 
     logout(user:any){
 
@@ -85,6 +80,11 @@ export class AuthService{
     AdminLogin(admin:any){
       return this.http.post<any>(`${this._url}admin/login`,admin)
     }
+
+    changeAdminPassword(changepassword:any){
+      return this.http.put<any>(`${this._url}admin/cahngePassword/:id`,changepassword)
+    }
+
 
     adminLogout(admin:any){
 
